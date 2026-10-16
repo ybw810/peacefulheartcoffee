@@ -1,8 +1,8 @@
 /**
- * Peaceful Heart Coffee - PWA Registration & Version Control Engine
+ * Mindful Drip - PWA Registration & Version Control Engine
  */
 
-const CURRENT_VERSION = '2.1.0';
+const CURRENT_VERSION = '2.2.0';
 
 export function registerPWA() {
   let swRegistration = null;
@@ -13,7 +13,7 @@ export function registerPWA() {
       navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
         .then(reg => {
           swRegistration = reg;
-          console.log('[Peaceful Heart PWA] Service Worker active (v' + CURRENT_VERSION + ')');
+          console.log('[Mindful Drip PWA] Service Worker active (v' + CURRENT_VERSION + ')');
 
           // Check for immediate update
           reg.update();
@@ -24,14 +24,14 @@ export function registerPWA() {
             if (newWorker) {
               newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  showUpdateToast('✨ 检测到新版本已发布，点击立即生效');
+                  showUpdateToast('✨ 检测到新版本已就绪，点击立即生效');
                 }
               });
             }
           });
         })
         .catch(err => {
-          console.warn('[Peaceful Heart PWA] SW registration failed:', err);
+          console.warn('[Mindful Drip PWA] SW registration failed:', err);
         });
 
       // Reload smoothly when new controller takes over
@@ -139,7 +139,7 @@ export function registerPWA() {
       pwaBanner.classList.remove('show');
       deferredPrompt.prompt();
       const choiceResult = await deferredPrompt.userChoice;
-      console.log('[Peaceful Heart PWA] User install choice:', choiceResult.outcome);
+      console.log('[Mindful Drip PWA] User install choice:', choiceResult.outcome);
       deferredPrompt = null;
     });
   }
@@ -152,7 +152,7 @@ export function registerPWA() {
   }
 
   window.addEventListener('appinstalled', () => {
-    console.log('[Peaceful Heart PWA] App successfully installed!');
+    console.log('[Mindful Drip PWA] App successfully installed!');
     if (pwaBanner) pwaBanner.classList.remove('show');
     deferredPrompt = null;
   });

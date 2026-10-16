@@ -1,9 +1,9 @@
 /**
- * Peaceful Heart Coffee - PWA Service Worker (v2.1.0)
+ * Mindful Drip - PWA Service Worker (v2.2.0)
  * Intelligent Network-First for Navigation, Stale-While-Revalidate for Assets
  */
 
-const CACHE_NAME = 'ph-coffee-v2.1.0';
+const CACHE_NAME = 'mindful-drip-v2.2.0';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -28,7 +28,7 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing v2.1.0...');
+  console.log('[Service Worker] Installing Mindful Drip v2.2.0...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[Service Worker] Pre-caching offline assets');
@@ -38,7 +38,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating v2.1.0...');
+  console.log('[Service Worker] Activating Mindful Drip v2.2.0...');
   event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(

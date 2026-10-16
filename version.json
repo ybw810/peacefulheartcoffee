@@ -1,7 +1,7 @@
 {
-  "version": "2.1.0",
-  "build": "20261016.1",
+  "version": "2.2.0",
+  "build": "20261016.2",
   "channel": "production",
-  "name": "Peaceful Heart Coffee Precision Lab",
-  "releaseNotes": "全新多层立体防裁切图标与实时版本自适应更新系统"
+  "name": "Mindful Drip Precision Lab",
+  "releaseNotes": "Mindful Drip 品牌升级，去除实验室字样，移动端英文禅意分栏 (Flow & Patience / Taste & Stillness)，初始化 Git 版本追踪与风味罗盘插件架构。"
 }

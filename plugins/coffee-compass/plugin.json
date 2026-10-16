@@ -1,0 +1,15 @@
+{
+  "id": "coffee-compass",
+  "name": "The Coffee Compass",
+  "version": "1.0.0",
+  "author": "Mindful Drip Lab",
+  "inspiration": "Barista Hustle by Matt Perger",
+  "description": "Interactive Coffee Extraction & Flavor Compass with 8-vector diagnostic engine and actionable grind/time/ratio prescriptions.",
+  "main": "compass-engine.js",
+  "capabilities": [
+    "flavor-diagnosis",
+    "extraction-vectors",
+    "brew-prescription",
+    "interactive-wheel-model"
+  ]
+}

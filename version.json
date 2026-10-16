@@ -1,8 +1,8 @@
 {
-  "version": "2.5.2",
-  "build": "20261016.11",
+  "version": "2.5.3",
+  "build": "20261016.12",
   "channel": "production",
   "name": "Peaceful Heart Coffee · Mindful Drip Precision Lab",
-  "releaseNotes": "修复大屏全屏模式下页脚偏左布局问题（闭合 main-grid 容器并扩充至 1180px）；加大风味纠偏罗盘浮窗（1180px）并优化诊断处方卡网格排版，彻底解决右侧文字溢出。"
+  "releaseNotes": "重绘圆角矩形透明底图标，消除 iOS 书签与标题栏黑边框；重新梳理顶部品牌三行层级；修复安装横幅与更新弹窗文字换行断词。"
 }
 

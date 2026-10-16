@@ -1,8 +1,8 @@
 /**
- * Mindful Drip - PWA Registration & Version Control Engine (v2.5.2)
+ * Mindful Drip - PWA Registration & Version Control Engine (v2.5.3)
  */
 
-export const APP_BUILD_VERSION = '2.5.2';
+export const APP_BUILD_VERSION = '2.5.3';
 
 export function registerPWA() {
   let swRegistration = null;
@@ -19,7 +19,7 @@ export function registerPWA() {
           // Check if there is already a waiting worker waiting to activate
           if (reg.waiting) {
             console.log('[Mindful Drip PWA] A waiting Service Worker is ready');
-            showUpdateToast('✨ 检测到新版本已就绪，点击立即生效');
+            showUpdateToast('新版本就绪，点击生效');
           }
 
           // Trigger immediate remote update check on sw.js
@@ -31,7 +31,7 @@ export function registerPWA() {
             if (newWorker) {
               newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  showUpdateToast('✨ 检测到新版本已就绪，点击立即生效');
+                  showUpdateToast('新版本就绪，点击生效');
                 }
               });
             }
@@ -78,7 +78,7 @@ export function registerPWA() {
             if (!isManual && dismissedVer === data.version) {
               return;
             }
-            showUpdateToast(`⚡ 发现新版本 v${data.version} · 点击刷新载入`);
+            showUpdateToast(`发现新版本 v${data.version} · 点击刷新`);
             return;
           }
         }

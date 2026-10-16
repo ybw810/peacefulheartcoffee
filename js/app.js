@@ -2,12 +2,12 @@
  * Peaceful Heart Coffee - Main Application Coordinator
  */
 
-import { BrewCalculator } from './brew-calc.js?v=2.5.2';
-import { BrewTimer } from './timer.js?v=2.5.2';
-import { GoldenCupCalculator } from './golden-cup.js?v=2.5.2';
-import { CommunityQRModal } from './qr-modal.js?v=2.5.2';
-import { registerPWA } from './pwa-register.js?v=2.5.2';
-import { CoffeeCompassModal } from './compass-bh.js?v=2.5.2';
+import { BrewCalculator } from './brew-calc.js?v=2.5.3';
+import { BrewTimer } from './timer.js?v=2.5.3';
+import { GoldenCupCalculator } from './golden-cup.js?v=2.5.3';
+import { CommunityQRModal } from './qr-modal.js?v=2.5.3';
+import { registerPWA } from './pwa-register.js?v=2.5.3';
+import { CoffeeCompassModal } from './compass-bh.js?v=2.5.3';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 0. Initialize BH Coffee Compass Modal

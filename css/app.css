@@ -86,25 +86,34 @@ body::after {
 }
 
 .brand-logo-wrap {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-sm);
-  background: var(--glass-surface);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow-sm);
+  background: transparent;
+  border: none;
+  box-shadow: none;
   display: grid;
   place-items: center;
-  overflow: hidden;
+  overflow: visible;
   transition: transform var(--duration-fast) var(--ease-spring);
 }
 
 .brand-logo-wrap:hover {
-  transform: scale(1.05) rotate(-3deg);
+  transform: scale(1.06) rotate(-2deg);
 }
 
 .brand-logo {
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.22));
+}
+
+.brand-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .brand-meta h1 {
@@ -112,19 +121,31 @@ body::after {
   font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  line-height: 1.15;
+  line-height: 1.12;
   color: var(--ink-primary);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.brand-meta p {
-  font-size: 0.78rem;
+.brand-meta .brand-sub {
+  font-size: 0.76rem;
   color: var(--ink-secondary);
   font-weight: 400;
-  margin-top: 3px;
+  margin-top: 2px;
   letter-spacing: 0.01em;
+  line-height: 1.25;
+}
+
+.brand-meta .brand-byline {
+  font-size: 0.66rem;
+  color: var(--amber-gold);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  margin-top: 3px;
+  opacity: 0.92;
+  display: block;
 }
 
 /* Top Actions */
@@ -1106,9 +1127,9 @@ body::after {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: min(440px, calc(100% - 32px));
+  width: min(480px, calc(100% - 24px));
   z-index: 90;
-  padding: 14px 18px;
+  padding: 12px 18px;
   border-radius: var(--radius-lg);
   background: var(--glass-elevated);
   border: 1px solid var(--amber-gold);
@@ -1130,15 +1151,25 @@ body::after {
   to { transform: translate(-50%, 0); opacity: 1; }
 }
 
+.pwa-banner-text {
+  min-width: 0;
+  flex: 1;
+}
+
 .pwa-banner-text h4 {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--amber-gold);
+  white-space: nowrap;
 }
 
 .pwa-banner-text p {
   font-size: 0.72rem;
   color: var(--ink-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
 }
 
 .pwa-banner-btns {
@@ -1258,8 +1289,8 @@ body::after {
   z-index: 1000;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 10px 18px;
+  gap: 12px;
+  padding: 8px 16px;
   border-radius: var(--radius-full);
   background: var(--glass-elevated);
   border: 1px solid var(--amber-gold);
@@ -1269,6 +1300,8 @@ body::after {
   opacity: 0;
   pointer-events: none;
   transition: all 0.35s var(--ease-spring);
+  white-space: nowrap;
+  max-width: calc(100% - 24px);
 }
 
 .update-toast.show {
@@ -1280,10 +1313,13 @@ body::after {
 .toast-content {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
+  gap: 6px;
+  font-size: 0.80rem;
   font-weight: 600;
   color: var(--ink-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-toast-reload {
@@ -1344,7 +1380,13 @@ body::after {
     gap: 16px;
   }
   .brand-meta h1 {
-    font-size: 1.22rem;
+    font-size: 1.25rem;
+  }
+  .brand-meta .brand-sub {
+    font-size: 0.70rem;
+  }
+  .brand-meta .brand-byline {
+    font-size: 0.62rem;
   }
   .card-content {
     padding: 16px 14px 20px;

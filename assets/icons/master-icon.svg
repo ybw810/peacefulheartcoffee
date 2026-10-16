@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <!-- Background Gradient for Inner Squircle Card -->
+    <!-- Background Gradient for Squircle Card -->
     <linearGradient id="cardBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#1f1814" />
       <stop offset="50%" stop-color="#140f0c" />
@@ -48,20 +48,17 @@
     </filter>
   </defs>
 
-  <!-- 1. FULL-BLEED Canvas Background: Guarantees 0 white edges regardless of OS squircle cut -->
-  <rect width="512" height="512" fill="#0e0b09" />
+  <!-- 1. LAYER 1: Outer Ambient Halo / Glow Track (Transparent Canvas Outside) -->
+  <rect x="14" y="14" width="484" height="484" rx="114" ry="114" fill="none" stroke="rgba(229,185,103,0.25)" stroke-width="4" filter="url(#squircleGlow)" />
 
-  <!-- 2. LAYER 1: Outer Ambient Halo / Glow Track -->
-  <rect x="42" y="42" width="428" height="428" rx="100" ry="100" fill="none" stroke="rgba(229,185,103,0.18)" stroke-width="3" filter="url(#squircleGlow)" />
+  <!-- 2. LAYER 2: Raised Artisan Squircle Card with Multi-layer Gradient Rim -->
+  <rect x="16" y="16" width="480" height="480" rx="110" ry="110" fill="url(#cardBgGrad)" stroke="url(#amberRimGrad)" stroke-width="5" />
 
-  <!-- 3. LAYER 2: Raised Artisan Card with Multi-layer Gradient Rim -->
-  <rect x="48" y="48" width="416" height="416" rx="94" ry="94" fill="url(#cardBgGrad)" stroke="url(#amberRimGrad)" stroke-width="4.5" />
+  <!-- 3. LAYER 3: Inner Glass Highlight Stroke -->
+  <rect x="24" y="24" width="464" height="464" rx="102" ry="102" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="2" />
+  <rect x="36" y="36" width="440" height="440" rx="90" ry="90" fill="none" stroke="rgba(213,145,97,0.12)" stroke-width="1.2" stroke-dasharray="8 6" />
 
-  <!-- 4. LAYER 3: Inner Glass Highlight Stroke -->
-  <rect x="58" y="58" width="396" height="396" rx="84" ry="84" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1.8" />
-  <rect x="68" y="68" width="376" height="376" rx="74" ry="74" fill="none" stroke="rgba(213,145,97,0.12)" stroke-width="1.2" stroke-dasharray="8 6" />
-
-  <!-- 5. Concentric Dial Gauge Ring & Precision Ticks -->
+  <!-- 4. Concentric Dial Gauge Ring & Precision Ticks -->
   <circle cx="256" cy="256" r="148" fill="none" stroke="rgba(213,145,97,0.22)" stroke-width="1.5" stroke-dasharray="3 7" />
   <circle cx="256" cy="256" r="158" fill="none" stroke="url(#goldGrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="130 520" filter="url(#dropGlow)" />
 
@@ -77,10 +74,10 @@
     <line x1="365" y1="365" x2="359" y2="359" />
   </g>
 
-  <!-- 6. V60 Dripper Top Rim -->
+  <!-- 5. V60 Dripper Top Rim -->
   <line x1="166" y1="198" x2="346" y2="198" stroke="url(#goldGrad)" stroke-width="11" stroke-linecap="round" filter="url(#dropGlow)" />
 
-  <!-- 7. V60 Dripper Cone -->
+  <!-- 6. V60 Dripper Cone -->
   <polygon points="182,204 330,204 282,288 230,288" fill="url(#coneGrad)" stroke="#d59161" stroke-width="5.5" stroke-linejoin="round" />
   
   <!-- Spiral Extraction Ribs inside Dripper -->
@@ -88,10 +85,10 @@
   <line x1="256" y1="210" x2="256" y2="282" stroke="rgba(242,208,142,0.75)" stroke-width="3.5" stroke-linecap="round" />
   <line x1="298" y1="210" x2="269" y2="282" stroke="rgba(242,208,142,0.45)" stroke-width="3" stroke-linecap="round" />
 
-  <!-- 8. Dripper Base Plate -->
+  <!-- 7. Dripper Base Plate -->
   <line x1="220" y1="294" x2="292" y2="294" stroke="#d59161" stroke-width="8" stroke-linecap="round" />
 
-  <!-- 9. Golden Espresso Drop Falling with Specular Gleam -->
+  <!-- 8. Golden Espresso Drop Falling with Specular Gleam -->
   <path d="M256,320 C256,320 240,342 240,355 C240,363.8 247.2,371 256,371 C264.8,371 272,363.8 272,355 C272,342 256,320 256,320 Z" fill="url(#goldGrad)" filter="url(#dropGlow)" />
   <circle cx="251.5" cy="352" r="3.8" fill="#ffffff" opacity="0.85" />
 </svg>

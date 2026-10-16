@@ -2,10 +2,19 @@
  * Mindful Drip - PWA Registration & Version Control Engine
  */
 
-const CURRENT_VERSION = '2.2.0';
+const CURRENT_VERSION = '2.4.0';
 
 export function registerPWA() {
   let swRegistration = null;
+
+  function getLocalVersion() {
+    const el = document.getElementById('appVersionText');
+    if (el && el.textContent) {
+      const match = el.textContent.trim().replace(/^v/, '');
+      if (match) return match;
+    }
+    return CURRENT_VERSION;
+  }
 
   // 1. Service Worker Registration with updateViaCache: 'none'
   if ('serviceWorker' in navigator) {
@@ -13,7 +22,7 @@ export function registerPWA() {
       navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
         .then(reg => {
           swRegistration = reg;
-          console.log('[Mindful Drip PWA] Service Worker active (v' + CURRENT_VERSION + ')');
+          console.log('[Mindful Drip PWA] Service Worker active (v' + getLocalVersion() + ')');
 
           // Check for immediate update
           reg.update();
@@ -55,11 +64,13 @@ export function registerPWA() {
 
   // 2. Remote Version JSON Checker
   async function checkRemoteVersion() {
+    if (sessionStorage.getItem('update_toast_dismissed')) return;
     try {
       const res = await fetch('./version.json?_t=' + Date.now(), { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
-        if (data && data.version && data.version !== CURRENT_VERSION) {
+        const currentVer = getLocalVersion();
+        if (data && data.version && data.version !== currentVer) {
           showUpdateToast(`⚡ 发现新版本 v${data.version} · 点击刷新载入`);
         }
       }
@@ -68,17 +79,27 @@ export function registerPWA() {
     }
   }
 
-  // Initial remote check after 3 seconds
-  setTimeout(checkRemoteVersion, 3000);
+  // Initial remote check after 4 seconds
+  setTimeout(checkRemoteVersion, 4000);
 
   // 3. UI Version Toast Management
   function showUpdateToast(msg) {
+    if (sessionStorage.getItem('update_toast_dismissed')) return;
     const toast = document.getElementById('updateToast');
     const toastText = document.getElementById('updateToastText');
     if (toast && toastText) {
       toastText.textContent = msg;
       toast.classList.add('show');
     }
+  }
+
+  const btnToastClose = document.getElementById('btnToastClose');
+  if (btnToastClose) {
+    btnToastClose.addEventListener('click', () => {
+      const toast = document.getElementById('updateToast');
+      if (toast) toast.classList.remove('show');
+      sessionStorage.setItem('update_toast_dismissed', 'true');
+    });
   }
 
   const btnToastReload = document.getElementById('btnToastReload');

@@ -7,8 +7,11 @@ import { BrewTimer } from './timer.js';
 import { GoldenCupCalculator } from './golden-cup.js';
 import { CommunityQRModal } from './qr-modal.js';
 import { registerPWA } from './pwa-register.js';
+import { CoffeeCompassModal } from './compass-bh.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  // 0. Initialize BH Coffee Compass Modal
+  const compassModal = new CoffeeCompassModal();
   // 1. Theme Switcher (Dark / Light)
   const btnThemeToggle = document.getElementById('btnThemeToggle');
   const storedTheme = localStorage.getItem('ph_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');

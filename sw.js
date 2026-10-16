@@ -3,7 +3,7 @@
  * Intelligent Network-First for Navigation, Stale-While-Revalidate for Assets
  */
 
-const CACHE_NAME = 'mindful-drip-v2.3.1';
+const CACHE_NAME = 'mindful-drip-v2.4.0';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -16,6 +16,7 @@ const ASSETS_TO_CACHE = [
   './js/brew-calc.js',
   './js/timer.js',
   './js/golden-cup.js',
+  './js/compass-bh.js',
   './js/qr-modal.js',
   './js/pwa-register.js',
   './assets/icons/favicon.svg',

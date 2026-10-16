@@ -90,68 +90,70 @@ export const BH_FLAVORS = [
   // Center Disc: Balanced
   { id: 'balanced', nameEn: 'Balanced', nameZh: '黄金平衡', vector: 'BALANCED', ring: 'center', angle: 0 },
 
-  // Inner Ring (Sage Green #749685): Positive Body & Balance Descriptors
-  { id: 'nuanced', nameEn: 'Nuanced', nameZh: '层析细致', vector: 'BALANCED', ring: 'inner', angle: 260 },
-  { id: 'buttery', nameEn: 'Buttery', nameZh: '黄油醇滑', vector: 'BALANCED', ring: 'inner', angle: 280 },
-  { id: 'substantial', nameEn: 'Substantial', nameZh: '醇实质感', vector: 'BALANCED', ring: 'inner', angle: 300 },
-  { id: 'plump', nameEn: 'Plump', nameZh: '圆润丰满', vector: 'BALANCED', ring: 'inner', angle: 318 },
-  { id: 'sticky', nameEn: 'Sticky', nameZh: '浓郁黏附', vector: 'BALANCED', ring: 'inner', angle: 336 },
-  { id: 'big', nameEn: 'Big', nameZh: '宏大厚实', vector: 'STRONG', ring: 'inner', angle: 350 },
-  { id: 'strong', nameEn: 'Strong', nameZh: '风味深浓', vector: 'STRONG', ring: 'inner', angle: 5 },
-  { id: 'heavy', nameEn: 'Heavy', nameZh: '沉实厚重', vector: 'STRONG', ring: 'inner', angle: 18 },
-  { id: 'hefty', nameEn: 'Hefty', nameZh: '饱满压舌', vector: 'STRONG', ring: 'inner', angle: 32 },
-  { id: 'robust', nameEn: 'Robust', nameZh: '醇厚坚实', vector: 'STRONG', ring: 'inner', angle: 46 },
-  { id: 'thick', nameEn: 'Thick', nameZh: '浓稠难咽', vector: 'STRONG', ring: 'inner', angle: 60 },
-  { id: 'rich', nameEn: 'Rich', nameZh: '丰富深邃', vector: 'BALANCED', ring: 'inner', angle: 75 },
-  { id: 'luscious', nameEn: 'Luscious', nameZh: '多汁甜美', vector: 'BALANCED', ring: 'inner', angle: 90 },
-  { id: 'sweet', nameEn: 'Sweet', nameZh: '清甜甘冽', vector: 'BALANCED', ring: 'inner', angle: 104 },
-  { id: 'pleasing', nameEn: 'Pleasing', nameZh: '怡人舒适', vector: 'BALANCED', ring: 'inner', angle: 118 },
-  { id: 'aromatic', nameEn: 'Aromatic', nameZh: '芬芳馥郁', vector: 'BALANCED', ring: 'inner', angle: 132 },
-  { id: 'delicate', nameEn: 'Delicate', nameZh: '细腻雅致', vector: 'WEAK', ring: 'inner', angle: 150 },
-  { id: 'gentle', nameEn: 'Gentle', nameZh: '温润轻柔', vector: 'WEAK', ring: 'inner', angle: 165 },
-  { id: 'thin', nameEn: 'Thin', nameZh: '质感偏薄', vector: 'WEAK', ring: 'inner', angle: 180 },
-  { id: 'transparent', nameEn: 'Transparent', nameZh: '纯净通透', vector: 'BALANCED', ring: 'inner', angle: 195 },
-  { id: 'soft', nameEn: 'Soft', nameZh: '柔和轻缓', vector: 'BALANCED', ring: 'inner', angle: 212 },
-  { id: 'slender', nameEn: 'Slender', nameZh: '纤瘦细巧', vector: 'WEAK', ring: 'inner', angle: 232 },
+  // Inner Ring (Sage Green #749685): Symmetrically spaced ~17° apart
+  { id: 'strong', nameEn: 'Strong', nameZh: '风味深浓', vector: 'STRONG', ring: 'inner', angle: 0 },
+  { id: 'heavy', nameEn: 'Heavy', nameZh: '沉实厚重', vector: 'STRONG', ring: 'inner', angle: 17 },
+  { id: 'hefty', nameEn: 'Hefty', nameZh: '饱满压舌', vector: 'STRONG', ring: 'inner', angle: 34 },
+  { id: 'robust', nameEn: 'Robust', nameZh: '醇厚坚实', vector: 'STRONG', ring: 'inner', angle: 51 },
+  { id: 'thick', nameEn: 'Thick', nameZh: '浓稠难咽', vector: 'STRONG', ring: 'inner', angle: 68 },
+  { id: 'rich', nameEn: 'Rich', nameZh: '丰富深邃', vector: 'BALANCED', ring: 'inner', angle: 85 },
+  { id: 'luscious', nameEn: 'Luscious', nameZh: '多汁甜美', vector: 'BALANCED', ring: 'inner', angle: 102 },
+  { id: 'sweet', nameEn: 'Sweet', nameZh: '清甜甘冽', vector: 'BALANCED', ring: 'inner', angle: 119 },
+  { id: 'pleasing', nameEn: 'Pleasing', nameZh: '怡人舒适', vector: 'BALANCED', ring: 'inner', angle: 136 },
+  { id: 'aromatic', nameEn: 'Aromatic', nameZh: '芬芳馥郁', vector: 'BALANCED', ring: 'inner', angle: 153 },
+  { id: 'delicate', nameEn: 'Delicate', nameZh: '细腻雅致', vector: 'WEAK', ring: 'inner', angle: 170 },
+  { id: 'gentle', nameEn: 'Gentle', nameZh: '温润轻柔', vector: 'WEAK', ring: 'inner', angle: 187 },
+  { id: 'thin', nameEn: 'Thin', nameZh: '质感偏薄', vector: 'WEAK', ring: 'inner', angle: 204 },
+  { id: 'transparent', nameEn: 'Transparent', nameZh: '纯净通透', vector: 'BALANCED', ring: 'inner', angle: 221 },
+  { id: 'soft', nameEn: 'Soft', nameZh: '柔和轻缓', vector: 'BALANCED', ring: 'inner', angle: 238 },
+  { id: 'slender', nameEn: 'Slender', nameZh: '纤瘦细巧', vector: 'WEAK', ring: 'inner', angle: 255 },
+  { id: 'nuanced', nameEn: 'Nuanced', nameZh: '层析细致', vector: 'BALANCED', ring: 'inner', angle: 272 },
+  { id: 'buttery', nameEn: 'Buttery', nameZh: '黄油醇滑', vector: 'BALANCED', ring: 'inner', angle: 289 },
+  { id: 'substantial', nameEn: 'Substantial', nameZh: '醇实质感', vector: 'BALANCED', ring: 'inner', angle: 306 },
+  { id: 'plump', nameEn: 'Plump', nameZh: '圆润丰满', vector: 'BALANCED', ring: 'inner', angle: 323 },
+  { id: 'sticky', nameEn: 'Sticky', nameZh: '浓郁黏附', vector: 'BALANCED', ring: 'inner', angle: 340 },
+  { id: 'big', nameEn: 'Big', nameZh: '宏大厚实', vector: 'STRONG', ring: 'inner', angle: 354 },
 
-  // Outer Ring (Dusty Rose #b87a87): Flaws and Extraction Adjustments
-  // Under-Extracted side (Left ~240° - 315°)
-  { id: 'sour', nameEn: 'Sour', nameZh: '尖酸刺舌', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 265 },
-  { id: 'vegetal', nameEn: 'Vegetal', nameZh: '青草蔬菜生味', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 250 },
-  { id: 'salty', nameEn: 'Salty', nameZh: '咸酸无糖感', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 280 },
-  { id: 'quick_finish', nameEn: 'Quick Finish', nameZh: '尾韵瞬间断层', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 295 },
+  // Outer Ring (Dusty Rose #b87a87): Clean spacing with zero overlap
+  // Strong & Over-Concentrated (Top: 6° to 48°)
+  { id: 'harsh', nameEn: 'Harsh', nameZh: '粗糙毛刺', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 6 },
+  { id: 'overwhelming', nameEn: 'Overwhelming', nameZh: '压舌窒息', vector: 'STRONG', ring: 'outer', angle: 20 },
+  { id: 'severe', nameEn: 'Severe', nameZh: '焦辣苦烈', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 34 },
+  { id: 'intense', nameEn: 'Intense', nameZh: '刺喉燥苦', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 48 },
+
+  // Over-Extracted side (Right: 64° to 138°)
+  { id: 'dry', nameEn: 'Dry', nameZh: '舌面发干', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 64 },
+  { id: 'bitter', nameEn: 'Bitter', nameZh: '焦苦杂味', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 80 },
+  { id: 'powdery', nameEn: 'Powdery', nameZh: '细粉沙感', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 96 },
+  { id: 'empty', nameEn: 'Empty', nameZh: '中段空洞', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 110 },
+  { id: 'dusty', nameEn: 'Dusty', nameZh: '尘土干燥感', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 124 },
+  { id: 'astringent', nameEn: 'Astringent', nameZh: '收敛干涩', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 138 },
+
+  // Weak / Watery side (Bottom: 150° to 238°)
+  { id: 'scrawny', nameEn: 'Scrawny', nameZh: '干瘪刺瘦', vector: 'WEAK', ring: 'outer', angle: 150 },
+  { id: 'limp', nameEn: 'Limp', nameZh: '软塌无力', vector: 'WEAK', ring: 'outer', angle: 158 },
+  { id: 'dilute', nameEn: 'Dilute', nameZh: '过度稀释', vector: 'WEAK', ring: 'outer', angle: 166 },
+  { id: 'fragile', nameEn: 'Fragile', nameZh: '脆弱松散', vector: 'WEAK', ring: 'outer', angle: 174 },
+  { id: 'muted', nameEn: 'Muted', nameZh: '风味闭塞', vector: 'WEAK', ring: 'outer', angle: 182 },
+  { id: 'faint', nameEn: 'Faint', nameZh: '微弱游离', vector: 'WEAK', ring: 'outer', angle: 190 },
+  { id: 'sparse', nameEn: 'Sparse', nameZh: '稀疏空乏', vector: 'WEAK', ring: 'outer', angle: 198 },
+  { id: 'tea_like', nameEn: 'Tea-Like', nameZh: '茶样寡淡', vector: 'WEAK', ring: 'outer', angle: 206 },
+  { id: 'flimsy', nameEn: 'Flimsy', nameZh: '薄弱寡淡', vector: 'WEAK', ring: 'outer', angle: 214 },
+  { id: 'insipid', nameEn: 'Insipid', nameZh: '平淡无奇', vector: 'WEAK', ring: 'outer', angle: 222 },
+  { id: 'watery', nameEn: 'Watery', nameZh: '水感寡淡', vector: 'WEAK', ring: 'outer', angle: 230 },
+  { id: 'bland', nameEn: 'Bland', nameZh: '寡淡清汤', vector: 'WEAK', ring: 'outer', angle: 238 },
+
+  // Under-Extracted side (Left: 254° to 310°)
+  { id: 'vegetal', nameEn: 'Vegetal', nameZh: '青草蔬菜生味', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 254 },
+  { id: 'sour', nameEn: 'Sour', nameZh: '尖酸刺舌', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 268 },
+  { id: 'salty', nameEn: 'Salty', nameZh: '咸酸无糖感', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 282 },
+  { id: 'quick_finish', nameEn: 'Quick Finish', nameZh: '尾韵瞬间断层', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 296 },
   { id: 'dull', nameEn: 'Dull', nameZh: '沉闷平钝', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 310 },
 
-  // Strong & Over-Concentrated (Top ~325° - 35°)
-  { id: 'savoury', nameEn: 'Savoury', nameZh: '咸醇沉重', vector: 'STRONG', ring: 'outer', angle: 326 },
-  { id: 'bulky', nameEn: 'Bulky', nameZh: '粗重臃肿', vector: 'STRONG', ring: 'outer', angle: 341 },
-  { id: 'soupy', nameEn: 'Soupy', nameZh: '混浊如泥汤', vector: 'STRONG', ring: 'outer', angle: 356 },
-  { id: 'harsh', nameEn: 'Harsh', nameZh: '粗糙毛刺', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 12 },
-  { id: 'overwhelming', nameEn: 'Overwhelming', nameZh: '压舌窒息', vector: 'STRONG', ring: 'outer', angle: 26 },
-  { id: 'severe', nameEn: 'Severe', nameZh: '焦辣苦烈', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 39 },
-  { id: 'intense', nameEn: 'Intense', nameZh: '刺喉燥苦', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 52 },
-
-  // Over-Extracted side (Right ~65° - 140°)
-  { id: 'dry', nameEn: 'Dry', nameZh: '舌面发干', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 66 },
-  { id: 'bitter', nameEn: 'Bitter', nameZh: '焦苦杂味', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 82 },
-  { id: 'powdery', nameEn: 'Powdery', nameZh: '细粉沙感', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 98 },
-  { id: 'empty', nameEn: 'Empty', nameZh: '中段空洞', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 112 },
-  { id: 'dusty', nameEn: 'Dusty', nameZh: '尘土干燥感', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 126 },
-  { id: 'astringent', nameEn: 'Astringent', nameZh: '收敛干涩', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 140 },
-
-  // Weak / Watery side (Bottom ~155° - 238°)
-  { id: 'scrawny', nameEn: 'Scrawny', nameZh: '干瘪刺瘦', vector: 'WEAK', ring: 'outer', angle: 154 },
-  { id: 'limp', nameEn: 'Limp', nameZh: '软塌无力', vector: 'WEAK', ring: 'outer', angle: 166 },
-  { id: 'dilute', nameEn: 'Dilute', nameZh: '过度稀释', vector: 'WEAK', ring: 'outer', angle: 177 },
-  { id: 'fragile', nameEn: 'Fragile', nameZh: '脆弱松散', vector: 'WEAK', ring: 'outer', angle: 188 },
-  { id: 'muted', nameEn: 'Muted', nameZh: '风味闭塞', vector: 'WEAK', ring: 'outer', angle: 199 },
-  { id: 'faint', nameEn: 'Faint', nameZh: '微弱游离', vector: 'WEAK', ring: 'outer', angle: 209 },
-  { id: 'sparse', nameEn: 'Sparse', nameZh: '稀疏空乏', vector: 'WEAK', ring: 'outer', angle: 219 },
-  { id: 'tea_like', nameEn: 'Tea-Like', nameZh: '茶样寡淡', vector: 'WEAK', ring: 'outer', angle: 228 },
-  { id: 'flimsy', nameEn: 'Flimsy', nameZh: '薄弱寡淡', vector: 'WEAK', ring: 'outer', angle: 237 },
-  { id: 'insipid', nameEn: 'Insipid', nameZh: '平淡无奇', vector: 'WEAK', ring: 'outer', angle: 245 },
-  { id: 'watery', nameEn: 'Watery', nameZh: '水感寡淡', vector: 'WEAK', ring: 'outer', angle: 254 },
-  { id: 'bland', nameEn: 'Bland', nameZh: '寡淡清汤', vector: 'WEAK', ring: 'outer', angle: 262 }
+  // Strong / Top-Left: 324° to 352°
+  { id: 'savoury', nameEn: 'Savoury', nameZh: '咸醇沉重', vector: 'STRONG', ring: 'outer', angle: 324 },
+  { id: 'bulky', nameEn: 'Bulky', nameZh: '粗重臃肿', vector: 'STRONG', ring: 'outer', angle: 338 },
+  { id: 'soupy', nameEn: 'Soupy', nameZh: '混浊如泥汤', vector: 'STRONG', ring: 'outer', angle: 352 }
 ];
 
 export class CoffeeCompassModal {
@@ -352,7 +354,7 @@ export class CoffeeCompassModal {
       const isInner = item.ring === 'inner';
       const rInner = isInner ? 68 : 142;
       const rOuter = isInner ? 134 : 228;
-      const pillWidth = isInner ? 21 : 23;
+      const pillWidth = isInner ? 17.5 : 19;
       const pillHeight = rOuter - rInner;
       const pillColor = isInner ? '#749685' : '#b87a87';
 
@@ -382,6 +384,7 @@ export class CoffeeCompassModal {
       text.setAttribute('x', '0');
       text.setAttribute('y', midY.toFixed(1));
       text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('dominant-baseline', 'central');
       text.setAttribute('class', 'flavor-pill-text');
 
       // Radial rotation for readability
@@ -390,9 +393,9 @@ export class CoffeeCompassModal {
 
       text.textContent = item.nameEn;
       text.setAttribute('fill', '#ffffff');
-      text.setAttribute('font-size', isInner ? '10' : '9.5');
+      text.setAttribute('font-size', isInner ? '9' : '8.5');
       text.setAttribute('font-weight', '600');
-      text.setAttribute('letter-spacing', '0.02em');
+      text.setAttribute('letter-spacing', '0.01em');
 
       g.appendChild(rect);
       g.appendChild(text);

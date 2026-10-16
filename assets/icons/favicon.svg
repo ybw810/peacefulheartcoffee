@@ -48,7 +48,10 @@
     </filter>
   </defs>
 
-  <!-- 1. LAYER 1: Outer Ambient Halo / Glow Track (Transparent Canvas Outside) -->
+  <!-- 0. FULL-BLEED Canvas Background: Ensures 0 transparent corners for OS squircle masking -->
+  <rect width="512" height="512" fill="url(#cardBgGrad)" />
+
+  <!-- 1. LAYER 1: Outer Ambient Halo / Glow Track -->
   <rect x="14" y="14" width="484" height="484" rx="114" ry="114" fill="none" stroke="rgba(229,185,103,0.25)" stroke-width="4" filter="url(#squircleGlow)" />
 
   <!-- 2. LAYER 2: Raised Artisan Squircle Card with Multi-layer Gradient Rim -->

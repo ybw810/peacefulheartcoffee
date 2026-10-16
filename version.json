@@ -1,8 +1,8 @@
 {
-  "version": "2.5.4",
-  "build": "20261016.13",
+  "version": "2.5.5",
+  "build": "20261016.14",
   "channel": "production",
   "name": "Peaceful Heart Coffee · Mindful Drip Precision Lab",
-  "releaseNotes": "彻底解决 iOS Safari 与 PWA 顶部状态栏在刷新时变灰问题：在 html 上显式指定 background-color 与 color-scheme，并在 head 头部内联即时主题同步脚本，消除白/灰条闪烁与着色偏差。"
+  "releaseNotes": "彻底解决 iOS Safari 分享面板图标缩小白边问题：基于 Apple HIG 规范重构 100% 满幅直角 RGB 原生应用级 apple-touch-icon 与多分辨率 favicon.ico，根目录物理文件部署，消除 SPA 路由拦截并补全 Open Graph 社交元数据。"
 }
 

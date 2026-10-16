@@ -1,23 +1,29 @@
 /**
- * Mindful Drip - PWA Service Worker (v2.5.4)
+ * Mindful Drip - PWA Service Worker (v2.5.5)
  * Intelligent Network-First for Navigation, Stale-While-Revalidate for Assets
  */
 
-const CACHE_NAME = 'mindful-drip-v2.5.4';
+const CACHE_NAME = 'mindful-drip-v2.5.5';
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './css/design-tokens.css',
-  './css/app.css',
-  './js/app.js',
+  './css/design-tokens.css?v=2.5.5',
+  './css/app.css?v=2.5.5',
+  './js/app.js?v=2.5.5',
   './js/brew-calc.js',
   './js/timer.js',
   './js/golden-cup.js',
   './js/compass-bh.js',
   './js/qr-modal.js',
   './js/pwa-register.js',
+  './favicon.ico',
+  './favicon.svg',
+  './apple-touch-icon.png',
+  './apple-touch-icon-precomposed.png',
+  './favicon-32x32.png',
+  './favicon-16x16.png',
   './assets/icons/favicon.svg',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',

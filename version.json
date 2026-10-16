@@ -1,6 +1,6 @@
 {
-  "version": "2.4.0",
-  "build": "20261016.5",
+  "version": "2.4.1",
+  "build": "20261016.6",
   "channel": "production",
   "name": "Mindful Drip Precision Lab",
   "releaseNotes": "全新加入独立 Barista Hustle 原版风味纠偏罗盘 (The Coffee Compass)，支持双语对照、实时搜索与科学冲煮诊断处方。"

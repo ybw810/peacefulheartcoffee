@@ -3,7 +3,7 @@
  * Intelligent Network-First for Navigation, Stale-While-Revalidate for Assets
  */
 
-const CACHE_NAME = 'mindful-drip-v2.4.0';
+const CACHE_NAME = 'mindful-drip-v2.4.1';
 
 const ASSETS_TO_CACHE = [
   './',

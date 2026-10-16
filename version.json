@@ -1,7 +1,7 @@
 {
-  "version": "2.2.0",
-  "build": "20261016.2",
+  "version": "2.3.0",
+  "build": "20261016.3",
   "channel": "production",
   "name": "Mindful Drip Precision Lab",
-  "releaseNotes": "Mindful Drip 品牌升级，去除实验室字样，移动端英文禅意分栏 (Flow & Patience / Taste & Stillness)，初始化 Git 版本追踪与风味罗盘插件架构。"
+  "releaseNotes": "落地 The Coffee Compass 交互式风味罗盘（双子药丸常驻切换），支持 8 象限萃取诊断与研磨/水温/时间调校处方建议。"
 }

@@ -13,20 +13,33 @@
 
   <!-- PWA & Mobile Web Capabilities -->
   <link rel="manifest" href="./manifest.webmanifest" />
-  <meta name="theme-color" content="#0f0d0b" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#f6f3ed" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" id="themeColorMeta" content="#0f0d0b" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Mindful Drip" />
+  
+  <!-- Immediate Theme Initialization to prevent status bar grey tint on reload -->
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('ph_theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.style.colorScheme = t;
+        var m = document.getElementById('themeColorMeta');
+        if (m) m.setAttribute('content', t === 'light' ? '#f6f3ed' : '#0f0d0b');
+      } catch (e) {}
+    })();
+  </script>
   
   <!-- Icons -->
   <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg" />
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="./css/design-tokens.css?v=2.5.3" />
-  <link rel="stylesheet" href="./css/app.css?v=2.5.3" />
+  <link rel="stylesheet" href="./css/design-tokens.css?v=2.5.4" />
+  <link rel="stylesheet" href="./css/app.css?v=2.5.4" />
 </head>
 <body>
 
@@ -596,7 +609,7 @@
         </div>
         <div class="footer-badge-item" id="appVersionBadge" title="点击检查更新并刷新">
           <span>🏷️</span>
-          <span id="appVersionText">v2.5.3</span>
+          <span id="appVersionText">v2.5.4</span>
           <button class="btn-check-update" id="btnCheckUpdate" aria-label="检查更新" title="强制检查最新版">↻</button>
         </div>
         <div class="footer-badge-item">
@@ -626,6 +639,6 @@
   </div>
 
   <!-- Application Bootstrap -->
-  <script type="module" src="./js/app.js?v=2.5.3"></script>
+  <script type="module" src="./js/app.js?v=2.5.4"></script>
 </body>
 </html>

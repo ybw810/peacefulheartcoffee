@@ -1,9 +1,9 @@
 /**
- * Mindful Drip - PWA Service Worker (v2.5.3)
+ * Mindful Drip - PWA Service Worker (v2.5.4)
  * Intelligent Network-First for Navigation, Stale-While-Revalidate for Assets
  */
 
-const CACHE_NAME = 'mindful-drip-v2.5.3';
+const CACHE_NAME = 'mindful-drip-v2.5.4';
 
 const ASSETS_TO_CACHE = [
   './',

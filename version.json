@@ -1,8 +1,8 @@
 {
-  "version": "2.5.3",
-  "build": "20261016.12",
+  "version": "2.5.4",
+  "build": "20261016.13",
   "channel": "production",
   "name": "Peaceful Heart Coffee · Mindful Drip Precision Lab",
-  "releaseNotes": "重绘圆角矩形透明底图标，消除 iOS 书签与标题栏黑边框；重新梳理顶部品牌三行层级；修复安装横幅与更新弹窗文字换行断词。"
+  "releaseNotes": "彻底解决 iOS Safari 与 PWA 顶部状态栏在刷新时变灰问题：在 html 上显式指定 background-color 与 color-scheme，并在 head 头部内联即时主题同步脚本，消除白/灰条闪烁与着色偏差。"
 }
 

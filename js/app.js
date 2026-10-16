@@ -2,27 +2,43 @@
  * Peaceful Heart Coffee - Main Application Coordinator
  */
 
-import { BrewCalculator } from './brew-calc.js?v=2.5.3';
-import { BrewTimer } from './timer.js?v=2.5.3';
-import { GoldenCupCalculator } from './golden-cup.js?v=2.5.3';
-import { CommunityQRModal } from './qr-modal.js?v=2.5.3';
-import { registerPWA } from './pwa-register.js?v=2.5.3';
-import { CoffeeCompassModal } from './compass-bh.js?v=2.5.3';
+import { BrewCalculator } from './brew-calc.js?v=2.5.4';
+import { BrewTimer } from './timer.js?v=2.5.4';
+import { GoldenCupCalculator } from './golden-cup.js?v=2.5.4';
+import { CommunityQRModal } from './qr-modal.js?v=2.5.4';
+import { registerPWA } from './pwa-register.js?v=2.5.4';
+import { CoffeeCompassModal } from './compass-bh.js?v=2.5.4';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 0. Initialize BH Coffee Compass Modal
   const compassModal = new CoffeeCompassModal();
-  // 1. Theme Switcher (Dark / Light)
+  
+  // 1. Theme Switcher (Dark / Light) with status bar & theme-color synchronization
   const btnThemeToggle = document.getElementById('btnThemeToggle');
-  const storedTheme = localStorage.getItem('ph_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-  document.documentElement.setAttribute('data-theme', storedTheme);
+  const metaThemeColor = document.getElementById('themeColorMeta') || document.querySelector('meta[name="theme-color"]');
+  const metaStatusBarStyle = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('ph_theme', theme);
+    const isLight = theme === 'light';
+    document.documentElement.style.colorScheme = isLight ? 'light' : 'dark';
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', isLight ? '#f6f3ed' : '#0f0d0b');
+    }
+    if (metaStatusBarStyle) {
+      metaStatusBarStyle.setAttribute('content', isLight ? 'default' : 'black-translucent');
+    }
+  }
+
+  const storedTheme = localStorage.getItem('ph_theme') || 'dark';
+  applyTheme(storedTheme);
 
   if (btnThemeToggle) {
     btnThemeToggle.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme') || 'dark';
       const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('ph_theme', next);
+      applyTheme(next);
     });
   }
 

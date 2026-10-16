@@ -1,6 +1,10 @@
 /**
  * Mindful Drip - Barista Hustle Coffee Compass Module
- * Faithfully recreating Matt Perger's iconic Coffee Compass with bilingual Chinese localization.
+ * Faithfully recreating Matt Perger's iconic Coffee Compass with:
+ * 1. Interactive rotatable dial (touch & mouse drag rotation with momentum)
+ * 2. Mobile half-wheel responsive mode (shifts center to right for maximum readability)
+ * 3. Bilingual Chinese localization directly on every pill
+ * 4. Focal indicator & instant diagnosis card
  */
 
 export const BH_COMPASS_VECTORS = {
@@ -91,28 +95,28 @@ export const BH_FLAVORS = [
   { id: 'balanced', nameEn: 'Balanced', nameZh: '黄金平衡', vector: 'BALANCED', ring: 'center', angle: 0 },
 
   // Inner Ring (Sage Green #749685): Symmetrically spaced ~17° apart
-  { id: 'strong', nameEn: 'Strong', nameZh: '风味深浓', vector: 'STRONG', ring: 'inner', angle: 0 },
-  { id: 'heavy', nameEn: 'Heavy', nameZh: '沉实厚重', vector: 'STRONG', ring: 'inner', angle: 17 },
-  { id: 'hefty', nameEn: 'Hefty', nameZh: '饱满压舌', vector: 'STRONG', ring: 'inner', angle: 34 },
-  { id: 'robust', nameEn: 'Robust', nameZh: '醇厚坚实', vector: 'STRONG', ring: 'inner', angle: 51 },
-  { id: 'thick', nameEn: 'Thick', nameZh: '浓稠难咽', vector: 'STRONG', ring: 'inner', angle: 68 },
-  { id: 'rich', nameEn: 'Rich', nameZh: '丰富深邃', vector: 'BALANCED', ring: 'inner', angle: 85 },
-  { id: 'luscious', nameEn: 'Luscious', nameZh: '多汁甜美', vector: 'BALANCED', ring: 'inner', angle: 102 },
-  { id: 'sweet', nameEn: 'Sweet', nameZh: '清甜甘冽', vector: 'BALANCED', ring: 'inner', angle: 119 },
-  { id: 'pleasing', nameEn: 'Pleasing', nameZh: '怡人舒适', vector: 'BALANCED', ring: 'inner', angle: 136 },
-  { id: 'aromatic', nameEn: 'Aromatic', nameZh: '芬芳馥郁', vector: 'BALANCED', ring: 'inner', angle: 153 },
-  { id: 'delicate', nameEn: 'Delicate', nameZh: '细腻雅致', vector: 'WEAK', ring: 'inner', angle: 170 },
-  { id: 'gentle', nameEn: 'Gentle', nameZh: '温润轻柔', vector: 'WEAK', ring: 'inner', angle: 187 },
-  { id: 'thin', nameEn: 'Thin', nameZh: '质感偏薄', vector: 'WEAK', ring: 'inner', angle: 204 },
-  { id: 'transparent', nameEn: 'Transparent', nameZh: '纯净通透', vector: 'BALANCED', ring: 'inner', angle: 221 },
-  { id: 'soft', nameEn: 'Soft', nameZh: '柔和轻缓', vector: 'BALANCED', ring: 'inner', angle: 238 },
-  { id: 'slender', nameEn: 'Slender', nameZh: '纤瘦细巧', vector: 'WEAK', ring: 'inner', angle: 255 },
-  { id: 'nuanced', nameEn: 'Nuanced', nameZh: '层析细致', vector: 'BALANCED', ring: 'inner', angle: 272 },
-  { id: 'buttery', nameEn: 'Buttery', nameZh: '黄油醇滑', vector: 'BALANCED', ring: 'inner', angle: 289 },
-  { id: 'substantial', nameEn: 'Substantial', nameZh: '醇实质感', vector: 'BALANCED', ring: 'inner', angle: 306 },
-  { id: 'plump', nameEn: 'Plump', nameZh: '圆润丰满', vector: 'BALANCED', ring: 'inner', angle: 323 },
-  { id: 'sticky', nameEn: 'Sticky', nameZh: '浓郁黏附', vector: 'BALANCED', ring: 'inner', angle: 340 },
-  { id: 'big', nameEn: 'Big', nameZh: '宏大厚实', vector: 'STRONG', ring: 'inner', angle: 354 },
+  { id: 'strong', nameEn: 'Strong', nameZh: '深浓', vector: 'STRONG', ring: 'inner', angle: 0 },
+  { id: 'heavy', nameEn: 'Heavy', nameZh: '厚重', vector: 'STRONG', ring: 'inner', angle: 17 },
+  { id: 'hefty', nameEn: 'Hefty', nameZh: '沉实', vector: 'STRONG', ring: 'inner', angle: 34 },
+  { id: 'robust', nameEn: 'Robust', nameZh: '醇厚', vector: 'STRONG', ring: 'inner', angle: 51 },
+  { id: 'thick', nameEn: 'Thick', nameZh: '稠密', vector: 'STRONG', ring: 'inner', angle: 68 },
+  { id: 'rich', nameEn: 'Rich', nameZh: '丰富', vector: 'BALANCED', ring: 'inner', angle: 85 },
+  { id: 'luscious', nameEn: 'Luscious', nameZh: '甜美', vector: 'BALANCED', ring: 'inner', angle: 102 },
+  { id: 'sweet', nameEn: 'Sweet', nameZh: '清甜', vector: 'BALANCED', ring: 'inner', angle: 119 },
+  { id: 'pleasing', nameEn: 'Pleasing', nameZh: '怡人', vector: 'BALANCED', ring: 'inner', angle: 136 },
+  { id: 'aromatic', nameEn: 'Aromatic', nameZh: '芬芳', vector: 'BALANCED', ring: 'inner', angle: 153 },
+  { id: 'delicate', nameEn: 'Delicate', nameZh: '细腻', vector: 'WEAK', ring: 'inner', angle: 170 },
+  { id: 'gentle', nameEn: 'Gentle', nameZh: '温润', vector: 'WEAK', ring: 'inner', angle: 187 },
+  { id: 'thin', nameEn: 'Thin', nameZh: '轻薄', vector: 'WEAK', ring: 'inner', angle: 204 },
+  { id: 'transparent', nameEn: 'Transparent', nameZh: '纯净', vector: 'BALANCED', ring: 'inner', angle: 221 },
+  { id: 'soft', nameEn: 'Soft', nameZh: '柔和', vector: 'BALANCED', ring: 'inner', angle: 238 },
+  { id: 'slender', nameEn: 'Slender', nameZh: '纤瘦', vector: 'WEAK', ring: 'inner', angle: 255 },
+  { id: 'nuanced', nameEn: 'Nuanced', nameZh: '细致', vector: 'BALANCED', ring: 'inner', angle: 272 },
+  { id: 'buttery', nameEn: 'Buttery', nameZh: '黄油', vector: 'BALANCED', ring: 'inner', angle: 289 },
+  { id: 'substantial', nameEn: 'Substantial', nameZh: '醇实', vector: 'BALANCED', ring: 'inner', angle: 306 },
+  { id: 'plump', nameEn: 'Plump', nameZh: '圆润', vector: 'BALANCED', ring: 'inner', angle: 323 },
+  { id: 'sticky', nameEn: 'Sticky', nameZh: '黏附', vector: 'BALANCED', ring: 'inner', angle: 340 },
+  { id: 'big', nameEn: 'Big', nameZh: '厚实', vector: 'STRONG', ring: 'inner', angle: 354 },
 
   // Outer Ring (Dusty Rose #b87a87): Clean spacing with zero overlap
   // Strong & Over-Concentrated (Top: 6° to 48°)
@@ -126,7 +130,7 @@ export const BH_FLAVORS = [
   { id: 'bitter', nameEn: 'Bitter', nameZh: '焦苦杂味', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 80 },
   { id: 'powdery', nameEn: 'Powdery', nameZh: '细粉沙感', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 96 },
   { id: 'empty', nameEn: 'Empty', nameZh: '中段空洞', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 110 },
-  { id: 'dusty', nameEn: 'Dusty', nameZh: '尘土干燥感', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 124 },
+  { id: 'dusty', nameEn: 'Dusty', nameZh: '尘土干燥', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 124 },
   { id: 'astringent', nameEn: 'Astringent', nameZh: '收敛干涩', vector: 'OVER_EXTRACTED', ring: 'outer', angle: 138 },
 
   // Weak / Watery side (Bottom: 150° to 238°)
@@ -144,16 +148,16 @@ export const BH_FLAVORS = [
   { id: 'bland', nameEn: 'Bland', nameZh: '寡淡清汤', vector: 'WEAK', ring: 'outer', angle: 238 },
 
   // Under-Extracted side (Left: 254° to 310°)
-  { id: 'vegetal', nameEn: 'Vegetal', nameZh: '青草蔬菜生味', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 254 },
+  { id: 'vegetal', nameEn: 'Vegetal', nameZh: '青草生味', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 254 },
   { id: 'sour', nameEn: 'Sour', nameZh: '尖酸刺舌', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 268 },
-  { id: 'salty', nameEn: 'Salty', nameZh: '咸酸无糖感', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 282 },
-  { id: 'quick_finish', nameEn: 'Quick Finish', nameZh: '尾韵瞬间断层', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 296 },
+  { id: 'salty', nameEn: 'Salty', nameZh: '咸酸无糖', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 282 },
+  { id: 'quick_finish', nameEn: 'Quick Finish', nameZh: '尾韵断层', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 296 },
   { id: 'dull', nameEn: 'Dull', nameZh: '沉闷平钝', vector: 'UNDER_EXTRACTED', ring: 'outer', angle: 310 },
 
   // Strong / Top-Left: 324° to 352°
-  { id: 'savoury', nameEn: 'Savoury', nameZh: '咸醇沉重', vector: 'STRONG', ring: 'outer', angle: 324 },
+  { id: 'savoury', nameEn: 'Savoury', nameZh: '咸醇发重', vector: 'STRONG', ring: 'outer', angle: 324 },
   { id: 'bulky', nameEn: 'Bulky', nameZh: '粗重臃肿', vector: 'STRONG', ring: 'outer', angle: 338 },
-  { id: 'soupy', nameEn: 'Soupy', nameZh: '混浊如泥汤', vector: 'STRONG', ring: 'outer', angle: 352 }
+  { id: 'soupy', nameEn: 'Soupy', nameZh: '混浊泥汤', vector: 'STRONG', ring: 'outer', angle: 352 }
 ];
 
 export class CoffeeCompassModal {
@@ -181,14 +185,25 @@ export class CoffeeCompassModal {
     this.ratioEl = document.getElementById('diagRatioVal');
 
     this.selectedFlavorId = 'sour';
+
+    // Dial rotation state
+    this.currentRotation = 0;
+    this.velocity = 0;
+    this.animFrameId = null;
+    this.isDragging = false;
+    this.hasMoved = false;
+
     this.init();
   }
 
   init() {
     if (!this.modal || !this.svg) return;
 
-    // Render Wheel
+    // Render Wheel SVG
     this.renderWheel();
+
+    // Setup interactive touch / drag rotation
+    this.setupRotationEvents();
 
     // Event listeners
     if (this.openBtn) {
@@ -238,13 +253,13 @@ export class CoffeeCompassModal {
         if (!tag) return;
         const flavorId = tag.getAttribute('data-flavor');
         if (flavorId) {
-          this.selectFlavor(flavorId);
+          this.rotateToPill(flavorId);
         }
       });
     }
 
-    // Select initial flavor
-    this.selectFlavor('sour');
+    // Select initial flavor (rotate to 'sour')
+    this.rotateToPill('sour', false);
   }
 
   open() {
@@ -261,7 +276,7 @@ export class CoffeeCompassModal {
     const svgNS = 'http://www.w3.org/2000/svg';
     this.svg.innerHTML = '';
 
-    // 1. Defs & Filters (Subtle glow)
+    // 1. Defs & Filters
     const defs = document.createElementNS(svgNS, 'defs');
     defs.innerHTML = `
       <filter id="activeGlow" x="-30%" y="-30%" width="160%" height="160%">
@@ -271,7 +286,12 @@ export class CoffeeCompassModal {
     `;
     this.svg.appendChild(defs);
 
-    // 2. Outer Dial Track & Ticks
+    // 2. Rotatable Wheel Container Group (This rotates smoothly when dragged or dialed)
+    const rotatingGroup = document.createElementNS(svgNS, 'g');
+    rotatingGroup.setAttribute('id', 'rotatingWheelGroup');
+    rotatingGroup.setAttribute('class', 'rotating-wheel-group');
+
+    // Outer Dial Track & Ticks
     const trackGroup = document.createElementNS(svgNS, 'g');
     trackGroup.setAttribute('class', 'compass-track-layer');
 
@@ -330,7 +350,6 @@ export class CoffeeCompassModal {
       text.setAttribute('text-anchor', 'middle');
       text.setAttribute('class', 'cardinal-label');
 
-      // Keep text upright relative to screen if in bottom half
       const isBottom = c.deg > 90 && c.deg < 270;
       if (isBottom) {
         text.setAttribute('transform', 'rotate(180)');
@@ -341,7 +360,7 @@ export class CoffeeCompassModal {
       trackGroup.appendChild(g);
     });
 
-    this.svg.appendChild(trackGroup);
+    rotatingGroup.appendChild(trackGroup);
 
     // 3. Radial Flavor Pills Layer
     const pillsGroup = document.createElementNS(svgNS, 'g');
@@ -378,7 +397,7 @@ export class CoffeeCompassModal {
       rect.setAttribute('class', 'flavor-pill-rect');
       rect.setAttribute('id', `pill-rect-${item.id}`);
 
-      // Text along the pill length
+      // Bilingual text along the pill length
       const midY = -((rInner + rOuter) / 2);
       const text = document.createElementNS(svgNS, 'text');
       text.setAttribute('x', '0');
@@ -387,35 +406,35 @@ export class CoffeeCompassModal {
       text.setAttribute('dominant-baseline', 'central');
       text.setAttribute('class', 'flavor-pill-text');
 
-      // Radial rotation for readability
       const rotateDeg = (item.angle >= 90 && item.angle <= 270) ? 90 : -90;
       text.setAttribute('transform', `rotate(${rotateDeg}, 0, ${midY.toFixed(1)})`);
 
-      text.textContent = item.nameEn;
-      text.setAttribute('fill', '#ffffff');
-      text.setAttribute('font-size', isInner ? '9' : '8.5');
-      text.setAttribute('font-weight', '600');
-      text.setAttribute('letter-spacing', '0.01em');
+      text.innerHTML = `
+        <tspan font-weight="700" fill="#ffffff" font-size="${isInner ? '8.8' : '8.5'}">${item.nameEn}</tspan>
+        <tspan font-weight="500" fill="rgba(255,255,255,0.85)" font-size="${isInner ? '7.5' : '7.2'}" dx="2">${item.nameZh}</tspan>
+      `;
 
       g.appendChild(rect);
       g.appendChild(text);
 
-      // Click handling
+      // Click handling: rotates smoothly to focal pointer & selects
       g.addEventListener('click', (e) => {
+        if (this.hasMoved) return; // Prevent triggering if it was a drag gesture
         e.stopPropagation();
-        this.selectFlavor(item.id);
+        this.rotateToPill(item.id);
       });
 
       pillsGroup.appendChild(g);
     });
 
-    this.svg.appendChild(pillsGroup);
+    rotatingGroup.appendChild(pillsGroup);
 
     // 4. Center Disc: Balanced Bullseye
     const centerGroup = document.createElementNS(svgNS, 'g');
     centerGroup.setAttribute('class', 'compass-center-hub');
     centerGroup.style.cursor = 'pointer';
     centerGroup.addEventListener('click', (e) => {
+      if (this.hasMoved) return;
       e.stopPropagation();
       this.selectFlavor('balanced');
     });
@@ -463,7 +482,187 @@ export class CoffeeCompassModal {
     centerSub.textContent = '黄金平衡';
     centerGroup.appendChild(centerSub);
 
-    this.svg.appendChild(centerGroup);
+    rotatingGroup.appendChild(centerGroup);
+
+    this.svg.appendChild(rotatingGroup);
+
+    // 5. Fixed Indicator Pointer (Stays fixed at West 270° focal point)
+    const fixedIndicator = document.createElementNS(svgNS, 'g');
+    fixedIndicator.setAttribute('class', 'fixed-compass-pointer');
+    fixedIndicator.setAttribute('id', 'fixedCompassPointer');
+    fixedIndicator.innerHTML = `
+      <defs>
+        <filter id="pointerGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#f59e0b" flood-opacity="0.8"/>
+        </filter>
+      </defs>
+      <line x1="-270" y1="0" x2="-248" y2="0" stroke="var(--amber-gold)" stroke-width="2.5" stroke-linecap="round" filter="url(#pointerGlow)" />
+      <polygon points="-250,-7.5 -250,7.5 -234,0" fill="var(--amber-gold)" filter="url(#pointerGlow)" />
+      <circle cx="-250" cy="0" r="2.5" fill="#ffffff" />
+      <text x="-264" y="-10" fill="var(--amber-gold)" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="0.04em">当前对齐</text>
+    `;
+    this.svg.appendChild(fixedIndicator);
+  }
+
+  setupRotationEvents() {
+    let isPointerDown = false;
+    let lastAngle = 0;
+    let pointerId = null;
+
+    const getAngleFromEvent = (e) => {
+      const rect = this.svg.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      return Math.atan2(e.clientY - cy, e.clientX - cx) * (180 / Math.PI);
+    };
+
+    this.svg.addEventListener('pointerdown', (e) => {
+      isPointerDown = true;
+      this.hasMoved = false;
+      this.totalDragDistance = 0;
+      pointerId = e.pointerId;
+      try { this.svg.setPointerCapture(e.pointerId); } catch (_) {}
+
+      lastAngle = getAngleFromEvent(e);
+      this.velocity = 0;
+      if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
+    });
+
+    this.svg.addEventListener('pointermove', (e) => {
+      if (!isPointerDown) return;
+      const currAngle = getAngleFromEvent(e);
+      let stepDiff = currAngle - lastAngle;
+      while (stepDiff > 180) stepDiff -= 360;
+      while (stepDiff < -180) stepDiff += 360;
+
+      this.totalDragDistance += Math.abs(stepDiff);
+      if (this.totalDragDistance > 2.5) this.hasMoved = true;
+
+      this.velocity = stepDiff;
+      lastAngle = currAngle;
+
+      this.currentRotation += stepDiff;
+      this.setWheelRotation(this.currentRotation, false);
+
+      // Realtime diagnosis update as user dials
+      this.updateClosestPill(false);
+    });
+
+    const onPointerUp = () => {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      try { this.svg.releasePointerCapture(pointerId); } catch (_) {}
+
+      if (this.hasMoved && Math.abs(this.velocity) > 0.3) {
+        // Momentum flick
+        const stepInertia = () => {
+          this.velocity *= 0.92;
+          this.currentRotation += this.velocity;
+          this.setWheelRotation(this.currentRotation, false);
+          this.updateClosestPill(false);
+          if (Math.abs(this.velocity) > 0.08) {
+            this.animFrameId = requestAnimationFrame(stepInertia);
+          } else {
+            this.updateClosestPill(true);
+            this.snapToClosest();
+          }
+        };
+        this.animFrameId = requestAnimationFrame(stepInertia);
+      } else if (this.hasMoved) {
+        this.updateClosestPill(true);
+        this.snapToClosest();
+      }
+    };
+
+    this.svg.addEventListener('pointerup', onPointerUp);
+    this.svg.addEventListener('pointercancel', onPointerUp);
+  }
+
+  setWheelRotation(deg, animate = false) {
+    this.currentRotation = deg;
+    const rotatingGroup = document.getElementById('rotatingWheelGroup');
+    if (rotatingGroup) {
+      if (animate) {
+        rotatingGroup.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+      } else {
+        rotatingGroup.style.transition = 'none';
+      }
+      rotatingGroup.setAttribute('transform', `rotate(${deg})`);
+    }
+  }
+
+  rotateToPill(flavorId, animate = true) {
+    const item = BH_FLAVORS.find(f => f.id === flavorId) || BH_FLAVORS[0];
+    if (item.ring === 'center') {
+      this.selectFlavor('balanced');
+      return;
+    }
+
+    // Focal point is 270° (West - left edge on both mobile half-mode and desktop)
+    const targetDeg = 270 - item.angle;
+    let diff = (targetDeg - this.currentRotation) % 360;
+    if (diff > 180) diff -= 360;
+    if (diff < -180) diff += 360;
+
+    const newRotation = this.currentRotation + diff;
+    this.setWheelRotation(newRotation, animate);
+    this.selectFlavor(item.id);
+  }
+
+  snapToClosest() {
+    let focusAngle = (270 - this.currentRotation) % 360;
+    if (focusAngle < 0) focusAngle += 360;
+
+    let closestItem = null;
+    let minDiff = Infinity;
+
+    BH_FLAVORS.forEach(item => {
+      if (item.ring === 'center') return;
+      let diff = Math.abs(item.angle - focusAngle);
+      if (diff > 180) diff = 360 - diff;
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestItem = item;
+      }
+    });
+
+    if (closestItem) {
+      this.rotateToPill(closestItem.id, true);
+    }
+  }
+
+  updateClosestPill(commit = true) {
+    // Focal target angle is 270° (West)
+    let focusAngle = (270 - this.currentRotation) % 360;
+    if (focusAngle < 0) focusAngle += 360;
+
+    let closestItem = null;
+    let minDiff = Infinity;
+
+    BH_FLAVORS.forEach(item => {
+      if (item.ring === 'center') return;
+      let diff = Math.abs(item.angle - focusAngle);
+      if (diff > 180) diff = 360 - diff;
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestItem = item;
+      }
+    });
+
+    if (closestItem) {
+      if (commit || closestItem.id !== this.selectedFlavorId) {
+        this.selectFlavor(closestItem.id);
+      } else {
+        this.previewFlavor(closestItem.id);
+      }
+    }
+  }
+
+  previewFlavor(flavorId) {
+    const allPills = this.svg.querySelectorAll('.flavor-pill-node');
+    allPills.forEach(p => p.classList.remove('active'));
+    const activePill = this.svg.querySelector(`.flavor-pill-node[data-id="${flavorId}"]`);
+    if (activePill) activePill.classList.add('active');
   }
 
   selectFlavor(flavorId) {
@@ -534,7 +733,7 @@ export class CoffeeCompassModal {
     });
 
     if (firstMatchedId) {
-      this.selectFlavor(firstMatchedId);
+      this.rotateToPill(firstMatchedId);
     }
   }
 

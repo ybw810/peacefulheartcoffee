@@ -1507,6 +1507,8 @@ body::after {
   align-items: center;
   justify-content: center;
   user-select: none;
+  position: relative;
+  touch-action: none;
 }
 
 .compass-svg {
@@ -1514,6 +1516,17 @@ body::after {
   height: 100%;
   overflow: visible;
   font-family: var(--font-sans);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.compass-svg:active {
+  cursor: grabbing;
+}
+
+.compass-mobile-swipe-hint {
+  display: none;
 }
 
 .flavor-pill-node {
@@ -1698,13 +1711,86 @@ body::after {
   color: var(--ink-primary);
 }
 
-@media (max-width: 580px) {
+@media (max-width: 640px) {
   .compass-modal-card {
-    padding: 18px 14px;
-    max-height: 94vh;
+    padding: 14px 12px 18px;
+    max-height: 95vh;
+    gap: 10px;
+    width: 100%;
   }
+
+  .compass-search-section {
+    gap: 8px;
+  }
+
+  .compass-search-box {
+    height: 38px;
+  }
+
+  .compass-wheel-container {
+    width: 100%;
+    height: 360px;
+    max-width: 100%;
+    aspect-ratio: unset;
+    position: relative;
+    overflow: hidden;
+    margin: 4px 0 2px;
+    border-radius: var(--radius-md);
+    background: radial-gradient(circle at 100% 50%, rgba(16, 185, 129, 0.08) 0%, rgba(0, 0, 0, 0.03) 70%);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.06);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .compass-svg {
+    position: absolute;
+    width: 680px;
+    height: 680px;
+    /* Shifts the center (0, 0) rightwards to anchor near the right border */
+    right: -330px;
+    top: 50%;
+    transform: translateY(-50%);
+    touch-action: none;
+    cursor: grab;
+  }
+
+  .compass-svg:active {
+    cursor: grabbing;
+  }
+
+  .compass-mobile-swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--ink-tertiary);
+    margin: 0 auto;
+    letter-spacing: 0.02em;
+  }
+
+  .compass-mobile-swipe-hint svg {
+    color: var(--amber-gold);
+    animation: bounceUpDown 1.8s ease-in-out infinite;
+  }
+
+  @keyframes bounceUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+  }
+
+  .compass-diagnosis-card {
+    padding: 14px 14px;
+    gap: 10px;
+  }
+
   .diagnosis-params-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
   }
 }
+
 

@@ -377,8 +377,10 @@ export class CoffeeCompassModal {
       text.setAttribute('dominant-baseline', 'central');
       text.setAttribute('class', 'flavor-pill-text');
 
-      const isLowerHalf = (item.angle >= 89.5 && item.angle <= 270.5);
-      const rotateDeg = isLowerHalf ? 90 : -90;
+      // Visible semicircle is the West hemisphere (175° to 360°/0°):
+      // rotate(90) makes baseline left-to-right (baseGlobalX > 0) and head pointing up (headGlobalY < 0)!
+      const isWest = (item.angle >= 175 && item.angle <= 360) || item.angle <= 5;
+      const rotateDeg = isWest ? 90 : -90;
       text.setAttribute('transform', `rotate(${rotateDeg}, 0, ${midY.toFixed(1)})`);
 
       text.innerHTML = `
@@ -595,11 +597,11 @@ export class CoffeeCompassModal {
       if (screenAngle < 0) screenAngle += 360;
 
       // Upright text orientation rule:
-      // In the lower semicircle [89.5°, 270.5°] (including focal point 270° West):
-      // rotate(90) points text outward-to-center (left-to-right reading), 100% upright!
-      // In the upper semicircle (270.5°, 360°) and [0°, 89.5°):
-      // rotate(-90) points text center-to-outward (left-to-right reading), 100% upright!
-      const targetRot = (screenAngle >= 89.5 && screenAngle <= 270.5) ? 90 : -90;
+      // In the visible West semicircle (175° to 360°/0°):
+      // rotate(90) makes baseline left-to-right (baseGlobalX > 0) and head pointing up (headGlobalY < 0)!
+      // In the hidden East semicircle (5° to 175°): rotate(-90)
+      const isWest = (screenAngle >= 175 && screenAngle <= 360) || screenAngle <= 5;
+      const targetRot = isWest ? 90 : -90;
       if (item.currentTextRot !== targetRot) {
         item.currentTextRot = targetRot;
         item.textEl.setAttribute('transform', `rotate(${targetRot}, 0, ${item.midY})`);

@@ -2,7 +2,7 @@
  * Mindful Drip - PWA Registration & Version Control Engine (v2.5.4)
  */
 
-export const APP_BUILD_VERSION = '2.5.4';
+export const APP_BUILD_VERSION = '2.5.5';
 
 export function registerPWA() {
   let swRegistration = null;
@@ -74,7 +74,7 @@ export function registerPWA() {
         if (data && data.version) {
           latestFoundVersion = data.version;
           if (data.version !== APP_BUILD_VERSION) {
-            const dismissedVer = sessionStorage.getItem('dismissed_version');
+            const dismissedVer = sessionStorage.getItem('dismissed_version') || localStorage.getItem('dismissed_version');
             if (!isManual && dismissedVer === data.version) {
               return;
             }
@@ -121,11 +121,16 @@ export function registerPWA() {
 
   const btnToastClose = document.getElementById('btnToastClose');
   if (btnToastClose) {
-    btnToastClose.addEventListener('click', () => {
+    btnToastClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       const toast = document.getElementById('updateToast');
       if (toast) toast.classList.remove('show');
       if (latestFoundVersion) {
-        sessionStorage.setItem('dismissed_version', latestFoundVersion);
+        try {
+          sessionStorage.setItem('dismissed_version', latestFoundVersion);
+          localStorage.setItem('dismissed_version', latestFoundVersion);
+        } catch (err) {}
       }
     });
   }

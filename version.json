@@ -1,8 +1,8 @@
 {
-  "version": "2.5.0",
-  "build": "20261016.9",
+  "version": "2.5.2",
+  "build": "20261016.11",
   "channel": "production",
-  "name": "Mindful Drip Precision Lab",
-  "releaseNotes": "全端半盘罗盘大重构（大屏双栏高清晰大字号、移动端防挤压），支持滚轮/触摸丝滑拨盘；重构 PWA 自动版本更新引擎与即时检查机制。"
+  "name": "Peaceful Heart Coffee · Mindful Drip Precision Lab",
+  "releaseNotes": "修复大屏全屏模式下页脚偏左布局问题（闭合 main-grid 容器并扩充至 1180px）；加大风味纠偏罗盘浮窗（1180px）并优化诊断处方卡网格排版，彻底解决右侧文字溢出。"
 }
 

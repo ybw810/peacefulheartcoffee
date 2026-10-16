@@ -1,9 +1,9 @@
 /**
- * Mindful Drip - PWA Service Worker (v2.5.0)
+ * Mindful Drip - PWA Service Worker (v2.5.2)
  * Intelligent Network-First for Navigation, Stale-While-Revalidate for Assets
  */
 
-const CACHE_NAME = 'mindful-drip-v2.5.0';
+const CACHE_NAME = 'mindful-drip-v2.5.2';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -28,10 +28,10 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing Mindful Drip v2.5.0...');
+  console.log('[Service Worker] Installing Mindful Drip v2.5.1...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      console.log('[Service Worker] Pre-caching offline assets for v2.5.0');
+      console.log('[Service Worker] Pre-caching offline assets for v2.5.1');
       // Resilient pre-caching: cache assets individually so one failure does not break the entire SW
       await Promise.allSettled(
         ASSETS_TO_CACHE.map(url => cache.add(url).catch(err => console.warn('[SW Pre-cache Error]', url, err)))
@@ -41,7 +41,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating Mindful Drip v2.5.0...');
+  console.log('[Service Worker] Activating Mindful Drip v2.5.1...');
   event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(

@@ -1,7 +1,7 @@
 {
-  "name": "Mindful Drip",
+  "name": "Peaceful Heart Coffee · Mindful Drip",
   "short_name": "Mindful Drip",
-  "description": "Mindful Drip - Precision Brewing & Flavor Compass. 极客咖啡萃取与风味计算器，支持三向解算、分段计时器、SCA 黄金杯风味罗盘与离线 PWA。",
+  "description": "心灵的安宁咖啡 (Peaceful Heart Coffee) 官方出品 · Mindful Drip 极客咖啡萃取与风味计算器，支持三向解算、分段计时器、SCA 黄金杯风味罗盘与离线 PWA。",
   "start_url": "./index.html",
   "id": "mindfuldrip",
   "scope": "./",

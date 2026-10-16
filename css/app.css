@@ -62,7 +62,7 @@ body::after {
 .app-container {
   position: relative;
   z-index: 1;
-  width: min(1080px, 100%);
+  width: min(1180px, 100%);
   margin: 0 auto;
   padding: max(12px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
   display: flex;
@@ -1170,6 +1170,7 @@ body::after {
 
 /* App Footer */
 .app-footer {
+  width: 100%;
   margin-top: 10px;
   padding: 12px 6px 8px;
   border-top: 1px solid var(--glass-border-subtle);
@@ -1379,9 +1380,10 @@ body::after {
    ========================================================================== */
 
 .compass-modal-card {
-  width: min(1040px, 95vw);
-  max-height: 92vh;
+  width: min(1180px, 95vw);
+  max-height: 93vh;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   padding: 24px 28px;
   gap: 16px;
@@ -1418,10 +1420,11 @@ body::after {
 /* Master Responsive Two-Column Grid */
 .compass-layout-grid {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1fr 1.08fr;
   gap: 24px;
   align-items: start;
   width: 100%;
+  min-width: 0;
 }
 
 .compass-left-pane {
@@ -1438,6 +1441,7 @@ body::after {
   gap: 14px;
   width: 100%;
   min-width: 0;
+  overflow: hidden;
 }
 
 .compass-search-section {
@@ -1698,9 +1702,17 @@ body::after {
 
 .diagnosis-params-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
-  margin-top: 2px;
+  margin-top: 4px;
+  width: 100%;
+}
+
+@media (max-width: 1080px) and (min-width: 841px) {
+  .diagnosis-params-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
 }
 
 .diag-param-chip {
@@ -1711,6 +1723,9 @@ body::after {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .diag-param-chip .param-icon {

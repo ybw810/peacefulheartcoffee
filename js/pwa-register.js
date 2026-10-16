@@ -1,31 +1,29 @@
 /**
- * Mindful Drip - PWA Registration & Version Control Engine
+ * Mindful Drip - PWA Registration & Version Control Engine (v2.5.0)
  */
 
-const CURRENT_VERSION = '2.4.3';
+export const APP_BUILD_VERSION = '2.5.0';
 
 export function registerPWA() {
   let swRegistration = null;
+  let latestFoundVersion = null;
 
-  function getLocalVersion() {
-    const el = document.getElementById('appVersionText');
-    if (el && el.textContent) {
-      const match = el.textContent.trim().replace(/^v/, '');
-      if (match) return match;
-    }
-    return CURRENT_VERSION;
-  }
-
-  // 1. Service Worker Registration with updateViaCache: 'none'
+  // 1. Service Worker Registration
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
         .then(reg => {
           swRegistration = reg;
-          console.log('[Mindful Drip PWA] Service Worker active (v' + getLocalVersion() + ')');
+          console.log('[Mindful Drip PWA] Service Worker registered (v' + APP_BUILD_VERSION + ')');
 
-          // Check for immediate update
-          reg.update();
+          // Check if there is already a waiting worker waiting to activate
+          if (reg.waiting) {
+            console.log('[Mindful Drip PWA] A waiting Service Worker is ready');
+            showUpdateToast('✨ 检测到新版本已就绪，点击立即生效');
+          }
+
+          // Trigger immediate remote update check on sw.js
+          reg.update().catch(() => {});
 
           // Listen for new worker installing
           reg.addEventListener('updatefound', () => {
@@ -53,38 +51,54 @@ export function registerPWA() {
       });
     });
 
-    // Re-check for SW update on tab visibility
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible' && swRegistration) {
-        swRegistration.update();
-        checkRemoteVersion();
+    // Re-check for SW update on tab visibility and window focus
+    const triggerUpdateCheck = () => {
+      if (swRegistration) {
+        swRegistration.update().catch(() => {});
       }
+      checkRemoteVersion(false);
+    };
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') triggerUpdateCheck();
     });
+    window.addEventListener('focus', triggerUpdateCheck);
   }
 
-  // 2. Remote Version JSON Checker
-  async function checkRemoteVersion() {
-    if (sessionStorage.getItem('update_toast_dismissed')) return;
+  // 2. Remote Version JSON Checker (Checks against version.json with anti-cache timestamp)
+  async function checkRemoteVersion(isManual = false) {
     try {
       const res = await fetch('./version.json?_t=' + Date.now(), { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
-        const currentVer = getLocalVersion();
-        if (data && data.version && data.version !== currentVer) {
-          showUpdateToast(`⚡ 发现新版本 v${data.version} · 点击刷新载入`);
+        if (data && data.version) {
+          latestFoundVersion = data.version;
+          if (data.version !== APP_BUILD_VERSION) {
+            const dismissedVer = sessionStorage.getItem('dismissed_version');
+            if (!isManual && dismissedVer === data.version) {
+              return;
+            }
+            showUpdateToast(`⚡ 发现新版本 v${data.version} · 点击刷新载入`);
+            return;
+          }
+        }
+        if (isManual) {
+          showToastNotice(`当前已是最新版 (v${APP_BUILD_VERSION}) ✨`);
         }
       }
     } catch (e) {
-      // Offline, ignore
+      if (isManual) {
+        showToastNotice('当前处于离线模式，已载入本地最新缓存');
+      }
     }
   }
 
-  // Initial remote check after 4 seconds
-  setTimeout(checkRemoteVersion, 4000);
+  // Initial checks: 800ms and 3500ms
+  setTimeout(() => checkRemoteVersion(false), 800);
+  setTimeout(() => checkRemoteVersion(false), 3500);
 
   // 3. UI Version Toast Management
   function showUpdateToast(msg) {
-    if (sessionStorage.getItem('update_toast_dismissed')) return;
     const toast = document.getElementById('updateToast');
     const toastText = document.getElementById('updateToastText');
     if (toast && toastText) {
@@ -93,12 +107,26 @@ export function registerPWA() {
     }
   }
 
+  function showToastNotice(msg) {
+    const toast = document.getElementById('updateToast');
+    const toastText = document.getElementById('updateToastText');
+    if (toast && toastText) {
+      toastText.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        if (toast.classList.contains('show')) toast.classList.remove('show');
+      }, 3000);
+    }
+  }
+
   const btnToastClose = document.getElementById('btnToastClose');
   if (btnToastClose) {
     btnToastClose.addEventListener('click', () => {
       const toast = document.getElementById('updateToast');
       if (toast) toast.classList.remove('show');
-      sessionStorage.setItem('update_toast_dismissed', 'true');
+      if (latestFoundVersion) {
+        sessionStorage.setItem('dismissed_version', latestFoundVersion);
+      }
     });
   }
 
@@ -117,7 +145,10 @@ export function registerPWA() {
     trigger.addEventListener('click', async (e) => {
       e.preventDefault();
       if (btnCheckUpdate) btnCheckUpdate.classList.add('spinning');
-      await forceCleanAndReload();
+      await checkRemoteVersion(true);
+      setTimeout(() => {
+        if (btnCheckUpdate) btnCheckUpdate.classList.remove('spinning');
+      }, 1200);
     });
   }
 

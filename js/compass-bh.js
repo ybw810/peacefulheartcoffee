@@ -280,42 +280,45 @@ export class CoffeeCompassModal {
     const defs = document.createElementNS(svgNS, 'defs');
     defs.innerHTML = `
       <filter id="activeGlow" x="-30%" y="-30%" width="160%" height="160%">
-        <feGaussianBlur stdDeviation="3.5" result="blur" />
+        <feGaussianBlur stdDeviation="4" result="blur" />
         <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+      <filter id="pointerGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="0" stdDeviation="4.5" flood-color="#f59e0b" flood-opacity="0.9"/>
       </filter>
     `;
     this.svg.appendChild(defs);
 
-    // 2. Rotatable Wheel Container Group (This rotates smoothly when dragged or dialed)
+    // 2. Rotatable Wheel Container Group (Rotates smoothly when dragged or dialed)
     const rotatingGroup = document.createElementNS(svgNS, 'g');
     rotatingGroup.setAttribute('id', 'rotatingWheelGroup');
     rotatingGroup.setAttribute('class', 'rotating-wheel-group');
 
-    // Outer Dial Track & Ticks
+    // Outer Dial Track & Ticks (Semi-wheel Dial outer track)
     const trackGroup = document.createElementNS(svgNS, 'g');
     trackGroup.setAttribute('class', 'compass-track-layer');
 
-    // Outer circle ring (radius 245)
+    // Outer circle ring (radius 330)
     const outerRing = document.createElementNS(svgNS, 'circle');
     outerRing.setAttribute('cx', '0');
     outerRing.setAttribute('cy', '0');
-    outerRing.setAttribute('r', '245');
+    outerRing.setAttribute('r', '330');
     outerRing.setAttribute('fill', 'none');
     outerRing.setAttribute('stroke', 'currentColor');
-    outerRing.setAttribute('stroke-opacity', '0.22');
-    outerRing.setAttribute('stroke-width', '1.2');
+    outerRing.setAttribute('stroke-opacity', '0.25');
+    outerRing.setAttribute('stroke-width', '1.5');
     trackGroup.appendChild(outerRing);
 
     // Ticks around 360 degrees
-    for (let deg = 0; deg < 360; deg += 5) {
-      const isMajor = deg % 45 === 0;
-      const isSemiMajor = deg % 15 === 0;
-      const tickLen = isMajor ? 9 : (isSemiMajor ? 6 : 3.5);
+    for (let deg = 0; deg < 360; deg += 4) {
+      const isMajor = deg % 40 === 0;
+      const isSemiMajor = deg % 20 === 0;
+      const tickLen = isMajor ? 12 : (isSemiMajor ? 8 : 4.5);
       const rad = (deg - 90) * (Math.PI / 180);
-      const x1 = Math.cos(rad) * 245;
-      const y1 = Math.sin(rad) * 245;
-      const x2 = Math.cos(rad) * (245 - tickLen);
-      const y2 = Math.sin(rad) * (245 - tickLen);
+      const x1 = Math.cos(rad) * 330;
+      const y1 = Math.sin(rad) * 330;
+      const x2 = Math.cos(rad) * (330 - tickLen);
+      const y2 = Math.sin(rad) * (330 - tickLen);
 
       const tick = document.createElementNS(svgNS, 'line');
       tick.setAttribute('x1', x1.toFixed(1));
@@ -323,46 +326,14 @@ export class CoffeeCompassModal {
       tick.setAttribute('x2', x2.toFixed(1));
       tick.setAttribute('y2', y2.toFixed(1));
       tick.setAttribute('stroke', 'currentColor');
-      tick.setAttribute('stroke-opacity', isMajor ? '0.7' : '0.3');
-      tick.setAttribute('stroke-width', isMajor ? '1.5' : '1');
+      tick.setAttribute('stroke-opacity', isMajor ? '0.75' : '0.35');
+      tick.setAttribute('stroke-width', isMajor ? '2' : '1.2');
       trackGroup.appendChild(tick);
     }
 
-    // Cardinal Labels on Ring
-    const cardinalLabels = [
-      { deg: 0, textEn: 'Strong', textZh: '过浓', arrow: '▲', r: 260 },
-      { deg: 45, textEn: 'OE / S', textZh: '过萃过浓', arrow: '△', r: 260 },
-      { deg: 90, textEn: 'Over Extracted', textZh: '过度萃取', arrow: '▶', r: 260 },
-      { deg: 135, textEn: 'OE / W', textZh: '过萃偏淡', arrow: '△', r: 260 },
-      { deg: 180, textEn: 'Weak', textZh: '水感偏淡', arrow: '▼', r: 260 },
-      { deg: 225, textEn: 'UE / W', textZh: '欠萃偏淡', arrow: '△', r: 260 },
-      { deg: 270, textEn: 'Under Extracted', textZh: '萃取不足', arrow: '◀', r: 260 },
-      { deg: 315, textEn: 'UE / S', textZh: '欠萃过浓', arrow: '△', r: 260 }
-    ];
-
-    cardinalLabels.forEach(c => {
-      const g = document.createElementNS(svgNS, 'g');
-      g.setAttribute('transform', `rotate(${c.deg}) translate(0, -${c.r})`);
-
-      const text = document.createElementNS(svgNS, 'text');
-      text.setAttribute('x', '0');
-      text.setAttribute('y', '0');
-      text.setAttribute('text-anchor', 'middle');
-      text.setAttribute('class', 'cardinal-label');
-
-      const isBottom = c.deg > 90 && c.deg < 270;
-      if (isBottom) {
-        text.setAttribute('transform', 'rotate(180)');
-      }
-
-      text.innerHTML = `<tspan font-weight="700" fill="currentColor">${c.arrow} ${c.textEn}</tspan> <tspan font-size="9" fill="currentColor" fill-opacity="0.7">(${c.textZh})</tspan>`;
-      g.appendChild(text);
-      trackGroup.appendChild(g);
-    });
-
     rotatingGroup.appendChild(trackGroup);
 
-    // 3. Radial Flavor Pills Layer
+    // 3. Radial Flavor Pills Layer (Enlarged pills with large, readable fonts)
     const pillsGroup = document.createElementNS(svgNS, 'g');
     pillsGroup.setAttribute('class', 'compass-pills-layer');
     pillsGroup.setAttribute('id', 'pillsGroup');
@@ -371,9 +342,9 @@ export class CoffeeCompassModal {
       if (item.ring === 'center') return;
 
       const isInner = item.ring === 'inner';
-      const rInner = isInner ? 68 : 142;
-      const rOuter = isInner ? 134 : 228;
-      const pillWidth = isInner ? 17.5 : 19;
+      const rInner = isInner ? 92 : 212;
+      const rOuter = isInner ? 202 : 322;
+      const pillWidth = isInner ? 28 : 31;
       const pillHeight = rOuter - rInner;
       const pillColor = isInner ? '#749685' : '#b87a87';
 
@@ -391,8 +362,8 @@ export class CoffeeCompassModal {
       rect.setAttribute('y', (-rOuter).toFixed(1));
       rect.setAttribute('width', pillWidth);
       rect.setAttribute('height', pillHeight);
-      rect.setAttribute('rx', '4.5');
-      rect.setAttribute('ry', '4.5');
+      rect.setAttribute('rx', isInner ? '6' : '6.5');
+      rect.setAttribute('ry', isInner ? '6' : '6.5');
       rect.setAttribute('fill', pillColor);
       rect.setAttribute('class', 'flavor-pill-rect');
       rect.setAttribute('id', `pill-rect-${item.id}`);
@@ -406,12 +377,13 @@ export class CoffeeCompassModal {
       text.setAttribute('dominant-baseline', 'central');
       text.setAttribute('class', 'flavor-pill-text');
 
-      const rotateDeg = (item.angle >= 90 && item.angle <= 270) ? 90 : -90;
+      const isLowerHalf = (item.angle >= 89.5 && item.angle <= 270.5);
+      const rotateDeg = isLowerHalf ? 90 : -90;
       text.setAttribute('transform', `rotate(${rotateDeg}, 0, ${midY.toFixed(1)})`);
 
       text.innerHTML = `
-        <tspan font-weight="700" fill="#ffffff" font-size="${isInner ? '8.8' : '8.5'}">${item.nameEn}</tspan>
-        <tspan font-weight="500" fill="rgba(255,255,255,0.85)" font-size="${isInner ? '7.5' : '7.2'}" dx="2">${item.nameZh}</tspan>
+        <tspan font-weight="700" fill="#ffffff" font-size="${isInner ? '11.8' : '12.2'}">${item.nameEn}</tspan>
+        <tspan font-weight="600" fill="rgba(255,255,255,0.92)" font-size="${isInner ? '10.2' : '10.6'}" dx="4">${item.nameZh}</tspan>
       `;
 
       item.textEl = text;
@@ -432,8 +404,9 @@ export class CoffeeCompassModal {
     });
 
     rotatingGroup.appendChild(pillsGroup);
+    this.svg.appendChild(rotatingGroup);
 
-    // 4. Center Disc: Balanced Bullseye
+    // 4. Center Disc: Balanced Bullseye Hub (Static on right, texts always level and upright)
     const centerGroup = document.createElementNS(svgNS, 'g');
     centerGroup.setAttribute('class', 'compass-center-hub');
     centerGroup.style.cursor = 'pointer';
@@ -443,12 +416,12 @@ export class CoffeeCompassModal {
       this.selectFlavor('balanced');
     });
 
-    // Center disc circle
+    // Center disc circle (radius 82)
     const centerCircle = document.createElementNS(svgNS, 'circle');
     centerCircle.setAttribute('cx', '0');
     centerCircle.setAttribute('cy', '0');
-    centerCircle.setAttribute('r', '60');
-    centerCircle.setAttribute('fill', '#6d8e7d');
+    centerCircle.setAttribute('r', '82');
+    centerCircle.setAttribute('fill', '#567e6c');
     centerCircle.setAttribute('class', 'center-circle-hub');
     centerCircle.setAttribute('id', 'pill-rect-balanced');
     centerGroup.appendChild(centerCircle);
@@ -457,53 +430,47 @@ export class CoffeeCompassModal {
     const centerDashedRing = document.createElementNS(svgNS, 'circle');
     centerDashedRing.setAttribute('cx', '0');
     centerDashedRing.setAttribute('cy', '0');
-    centerDashedRing.setAttribute('r', '53');
+    centerDashedRing.setAttribute('r', '74');
     centerDashedRing.setAttribute('fill', 'none');
-    centerDashedRing.setAttribute('stroke', 'rgba(255,255,255,0.4)');
-    centerDashedRing.setAttribute('stroke-dasharray', '3.5 3');
-    centerDashedRing.setAttribute('stroke-width', '1');
+    centerDashedRing.setAttribute('stroke', 'rgba(255,255,255,0.45)');
+    centerDashedRing.setAttribute('stroke-dasharray', '4 3.5');
+    centerDashedRing.setAttribute('stroke-width', '1.5');
     centerGroup.appendChild(centerDashedRing);
 
-    // Center texts
+    // Center texts (Positioned on the visible left half of the center hub)
     const centerTitle = document.createElementNS(svgNS, 'text');
-    centerTitle.setAttribute('x', '0');
-    centerTitle.setAttribute('y', '-2');
+    centerTitle.setAttribute('x', '-25');
+    centerTitle.setAttribute('y', '-6');
     centerTitle.setAttribute('text-anchor', 'middle');
     centerTitle.setAttribute('fill', '#ffffff');
-    centerTitle.setAttribute('font-size', '13.5');
+    centerTitle.setAttribute('font-size', '14');
     centerTitle.setAttribute('font-weight', '700');
     centerTitle.setAttribute('letter-spacing', '0.04em');
     centerTitle.textContent = 'Balanced';
     centerGroup.appendChild(centerTitle);
 
     const centerSub = document.createElementNS(svgNS, 'text');
-    centerSub.setAttribute('x', '0');
+    centerSub.setAttribute('x', '-25');
     centerSub.setAttribute('y', '15');
     centerSub.setAttribute('text-anchor', 'middle');
-    centerSub.setAttribute('fill', 'rgba(255,255,255,0.92)');
-    centerSub.setAttribute('font-size', '9.5');
-    centerSub.setAttribute('font-weight', '500');
+    centerSub.setAttribute('fill', 'rgba(255,255,255,0.95)');
+    centerSub.setAttribute('font-size', '11');
+    centerSub.setAttribute('font-weight', '600');
     centerSub.textContent = '黄金平衡';
     centerGroup.appendChild(centerSub);
 
-    rotatingGroup.appendChild(centerGroup);
+    this.svg.appendChild(centerGroup);
 
-    this.svg.appendChild(rotatingGroup);
-
-    // 5. Fixed Indicator Pointer (Stays fixed at West 270° focal point)
+    // 5. Fixed Indicator Pointer (Fixed at West 270° focal point)
     const fixedIndicator = document.createElementNS(svgNS, 'g');
     fixedIndicator.setAttribute('class', 'fixed-compass-pointer');
     fixedIndicator.setAttribute('id', 'fixedCompassPointer');
     fixedIndicator.innerHTML = `
-      <defs>
-        <filter id="pointerGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#f59e0b" flood-opacity="0.8"/>
-        </filter>
-      </defs>
-      <line x1="-270" y1="0" x2="-248" y2="0" stroke="var(--amber-gold)" stroke-width="2.5" stroke-linecap="round" filter="url(#pointerGlow)" />
-      <polygon points="-250,-7.5 -250,7.5 -234,0" fill="var(--amber-gold)" filter="url(#pointerGlow)" />
-      <circle cx="-250" cy="0" r="2.5" fill="#ffffff" />
-      <text x="-264" y="-10" fill="var(--amber-gold)" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="0.04em">当前对齐</text>
+      <!-- Pointer line & arrow pointing East towards center (0,0) -->
+      <line x1="-362" y1="0" x2="-332" y2="0" stroke="var(--amber-gold)" stroke-width="3" stroke-linecap="round" filter="url(#pointerGlow)" />
+      <polygon points="-334,-9 -334,9 -318,0" fill="var(--amber-gold)" filter="url(#pointerGlow)" />
+      <circle cx="-334" cy="0" r="3" fill="#ffffff" />
+      <text x="-345" y="-14" fill="var(--amber-gold)" font-size="9.5" font-weight="700" text-anchor="middle" letter-spacing="0.05em">当前对齐</text>
     `;
     this.svg.appendChild(fixedIndicator);
   }
@@ -513,13 +480,19 @@ export class CoffeeCompassModal {
     let lastAngle = 0;
     let pointerId = null;
 
+    // Accurate pivot coordinate calculation:
+    // viewBox is "-365 -195 390 390".
+    // (0, 0) in SVG coordinate maps to:
+    // x = (0 - (-365)) / 390 = 365 / 390 of the rendered element width
+    // y = (0 - (-195)) / 390 = 195 / 390 = 0.5 of the rendered element height
     const getAngleFromEvent = (e) => {
       const rect = this.svg.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
+      const cx = rect.left + rect.width * (365 / 390);
+      const cy = rect.top + rect.height * 0.5;
       return Math.atan2(e.clientY - cy, e.clientX - cx) * (180 / Math.PI);
     };
 
+    // 1. Pointer (Touch & Mouse Drag) Events
     this.svg.addEventListener('pointerdown', (e) => {
       isPointerDown = true;
       this.hasMoved = false;
@@ -580,6 +553,25 @@ export class CoffeeCompassModal {
 
     this.svg.addEventListener('pointerup', onPointerUp);
     this.svg.addEventListener('pointercancel', onPointerUp);
+
+    // 2. Mouse Wheel Event on Dial Container (Smooth wheel rotation for desktop!)
+    const wheelContainer = this.svg.parentElement || this.svg;
+    let wheelDebounceTimer = null;
+    wheelContainer.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY || e.deltaX;
+      // Step rotation
+      const rotationStep = delta > 0 ? 5.5 : -5.5;
+      this.currentRotation += rotationStep;
+      this.setWheelRotation(this.currentRotation, false);
+      this.updateClosestPill(false);
+
+      if (wheelDebounceTimer) clearTimeout(wheelDebounceTimer);
+      wheelDebounceTimer = setTimeout(() => {
+        this.updateClosestPill(true);
+        this.snapToClosest();
+      }, 160);
+    }, { passive: false });
   }
 
   setWheelRotation(deg, animate = false) {
@@ -602,10 +594,12 @@ export class CoffeeCompassModal {
       let screenAngle = (item.angle + currentRotation) % 360;
       if (screenAngle < 0) screenAngle += 360;
 
-      // When the pill is on the left half of the screen (West hemisphere [90, 270]):
-      // It points westward towards the focal point. rotate(90) makes the text 100% horizontal and right-side up.
-      // When on the right half (<90 or >270), rotate(-90) makes it horizontal and right-side up.
-      const targetRot = (screenAngle >= 90 && screenAngle <= 270) ? 90 : -90;
+      // Upright text orientation rule:
+      // In the lower semicircle [89.5°, 270.5°] (including focal point 270° West):
+      // rotate(90) points text outward-to-center (left-to-right reading), 100% upright!
+      // In the upper semicircle (270.5°, 360°) and [0°, 89.5°):
+      // rotate(-90) points text center-to-outward (left-to-right reading), 100% upright!
+      const targetRot = (screenAngle >= 89.5 && screenAngle <= 270.5) ? 90 : -90;
       if (item.currentTextRot !== targetRot) {
         item.currentTextRot = targetRot;
         item.textEl.setAttribute('transform', `rotate(${targetRot}, 0, ${item.midY})`);

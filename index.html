@@ -23,8 +23,8 @@
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="./css/design-tokens.css" />
-  <link rel="stylesheet" href="./css/app.css" />
+  <link rel="stylesheet" href="./css/design-tokens.css?v=2.5.0" />
+  <link rel="stylesheet" href="./css/app.css?v=2.5.0" />
 </head>
 <body>
 
@@ -386,6 +386,7 @@
     <!-- Barista Hustle Coffee Compass Modal -->
     <div class="modal-overlay" id="compassModal" role="dialog" aria-modal="true" aria-labelledby="compassModalTitle">
       <div class="modal-card compass-modal-card">
+        <!-- Modal Top Bar Header -->
         <div class="modal-header compass-modal-header">
           <div class="modal-title">
             <a href="https://www.baristahustle.com/the-coffee-compass/" target="_blank" rel="noopener noreferrer" class="compass-title-badge" title="访问 Barista Hustle 官方 Coffee Compass 原著页面">
@@ -401,108 +402,116 @@
           <button class="btn-close-modal" id="btnCloseCompass" aria-label="关闭罗盘">✕</button>
         </div>
 
-        <!-- Quick Search Bar & Tags -->
-        <div class="compass-search-section">
-          <div class="compass-search-box">
-            <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input type="text" id="compassSearchInput" class="compass-search-input" placeholder="输入尝到的风味 (如: 尖酸, 苦, 涩, 水感, 浓重, Sour, Bitter...)" autocomplete="off" />
-            <button type="button" class="compass-search-clear" id="compassSearchClear" aria-label="清除" style="display:none;">✕</button>
-          </div>
-          <div class="compass-quick-tags" id="compassQuickTags">
-            <span class="quick-tag" data-flavor="sour">🍋 生硬尖酸 (Sour)</span>
-            <span class="quick-tag" data-flavor="bitter">☕ 焦苦杂味 (Bitter)</span>
-            <span class="quick-tag" data-flavor="astringent">👅 紧缩干涩 (Astringent)</span>
-            <span class="quick-tag" data-flavor="watery">💧 水汽寡淡 (Watery)</span>
-            <span class="quick-tag" data-flavor="strong">🍯 浓郁饱满 (Strong)</span>
-            <span class="quick-tag" data-flavor="balanced">🎯 黄金平衡 (Balanced)</span>
-          </div>
-        </div>
-
-        <!-- Interactive SVG Wheel Canvas -->
-        <div class="compass-wheel-container">
-          <svg id="compassSvg" class="compass-svg" viewBox="-280 -280 560 560" width="100%" height="100%">
-            <!-- Dynamically populated via compass-bh.js -->
-          </svg>
-        </div>
-
-        <!-- Mobile dial gesture guide -->
-        <div class="compass-mobile-swipe-hint">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <polyline points="7 10 12 5 17 10"></polyline>
-            <polyline points="7 14 12 19 17 14"></polyline>
-          </svg>
-          <span>上下滑动旋转拨盘 · 自动对齐风味</span>
-        </div>
-
-        <!-- Selected Flavor & Prescriptions Card -->
-        <div class="compass-diagnosis-card" id="compassDiagnosisCard">
-          <div class="diagnosis-top-bar">
-            <div class="diagnosis-flavor-info">
-              <span class="flavor-dot" id="diagnosisDot"></span>
-              <span class="flavor-name-en" id="diagnosisNameEn">Sour</span>
-              <span class="flavor-name-zh" id="diagnosisNameZh">尖酸刺舌</span>
+        <!-- Master Responsive Grid: Left Pane (Semi-wheel Dial) & Right Pane (Search & Diagnosis) -->
+        <div class="compass-layout-grid">
+          <!-- Left Column: Interactive Semi-wheel Dial -->
+          <div class="compass-left-pane">
+            <div class="compass-wheel-container">
+              <svg id="compassSvg" class="compass-svg" viewBox="-365 -195 390 390" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+                <!-- Dynamically populated via compass-bh.js -->
+              </svg>
             </div>
-            <span class="vector-action-badge" id="diagnosisBadge">增加萃取 (Extract More)</span>
-          </div>
 
-          <div class="diagnosis-guidance-content">
-            <div class="guidance-main-action" id="guidanceAction">
-              调细研磨度 1~2 格 / 提高冲煮水温 1~2°C / 延长萃取耗时
+            <!-- Gesture / Interaction Hint -->
+            <div class="compass-mobile-swipe-hint">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="7 10 12 5 17 10"></polyline>
+                <polyline points="7 14 12 19 17 14"></polyline>
+              </svg>
+              <span>上下滑动 / 滚轮旋转拨盘 · 点击标签自动对齐</span>
             </div>
-            <p class="guidance-desc" id="guidanceDesc">
-              咖啡展现出生硬尖酸、青草生味或咸涩，甜感未能充分释放。水流通过过快或未能提取出中后段高沸点成熟糖分与芳香物质。
-            </p>
           </div>
 
-          <div class="diagnosis-params-grid">
-            <div class="diag-param-chip">
-              <span class="param-icon">🔧</span>
-              <div class="param-body">
-                <span class="param-label">研磨度 (Grind)</span>
-                <span class="param-val" id="diagGrindVal">调细 1~2 格</span>
+          <!-- Right Column: Search, Diagnosis Card & Detailed Adjustments -->
+          <div class="compass-right-pane">
+            <!-- Quick Search Bar & Tags -->
+            <div class="compass-search-section">
+              <div class="compass-search-box">
+                <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="compassSearchInput" class="compass-search-input" placeholder="输入尝到的风味 (如: 尖酸, 苦, 涩, 水感, 浓重, Sour, Bitter...)" autocomplete="off" />
+                <button type="button" class="compass-search-clear" id="compassSearchClear" aria-label="清除" style="display:none;">✕</button>
+              </div>
+              <div class="compass-quick-tags" id="compassQuickTags">
+                <span class="quick-tag" data-flavor="sour">🍋 生硬尖酸 (Sour)</span>
+                <span class="quick-tag" data-flavor="bitter">☕ 焦苦杂味 (Bitter)</span>
+                <span class="quick-tag" data-flavor="astringent">👅 紧缩干涩 (Astringent)</span>
+                <span class="quick-tag" data-flavor="watery">💧 水汽寡淡 (Watery)</span>
+                <span class="quick-tag" data-flavor="strong">🍯 浓郁饱满 (Strong)</span>
+                <span class="quick-tag" data-flavor="balanced">🎯 黄金平衡 (Balanced)</span>
               </div>
             </div>
-            <div class="diag-param-chip">
-              <span class="param-icon">⏱️</span>
-              <div class="param-body">
-                <span class="param-label">萃取耗时 (Time)</span>
-                <span class="param-val" id="diagTimeVal">延长 15~20s</span>
+
+            <!-- Selected Flavor & Prescriptions Card -->
+            <div class="compass-diagnosis-card" id="compassDiagnosisCard">
+              <div class="diagnosis-top-bar">
+                <div class="diagnosis-flavor-info">
+                  <span class="flavor-dot" id="diagnosisDot"></span>
+                  <span class="flavor-name-en" id="diagnosisNameEn">Sour</span>
+                  <span class="flavor-name-zh" id="diagnosisNameZh">生硬尖酸</span>
+                </div>
+                <span class="vector-action-badge" id="diagnosisBadge">增加萃取 (Extract More)</span>
+              </div>
+
+              <div class="diagnosis-guidance-content">
+                <div class="guidance-main-action" id="guidanceAction">
+                  调细研磨度 1~2 格 / 提高冲煮水温 1~2°C / 延长萃取耗时
+                </div>
+                <p class="guidance-desc" id="guidanceDesc">
+                  咖啡展现出生硬生酸、草本生青或涩咸，成熟果糖未及充分释放。水流穿透偏快，未能充分萃出咖啡豆中后段高沸点的成熟糖分与芳香物质。
+                </p>
+              </div>
+
+              <div class="diagnosis-params-grid">
+                <div class="diag-param-chip">
+                  <span class="param-icon">🔧</span>
+                  <div class="param-body">
+                    <span class="param-label">研磨度 (Grind)</span>
+                    <span class="param-val" id="diagGrindVal">调细 1~2 格</span>
+                  </div>
+                </div>
+                <div class="diag-param-chip">
+                  <span class="param-icon">⏱️</span>
+                  <div class="param-body">
+                    <span class="param-label">萃取耗时 (Time)</span>
+                    <span class="param-val" id="diagTimeVal">延长 15~20s</span>
+                  </div>
+                </div>
+                <div class="diag-param-chip">
+                  <span class="param-icon">🌡️</span>
+                  <div class="param-body">
+                    <span class="param-label">水温 (Temp)</span>
+                    <span class="param-val" id="diagTempVal">提升 1~2°C</span>
+                  </div>
+                </div>
+                <div class="diag-param-chip">
+                  <span class="param-icon">💧</span>
+                  <div class="param-body">
+                    <span class="param-label">粉水比 (Ratio)</span>
+                    <span class="param-val" id="diagRatioVal">保持现有比例</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="diag-param-chip">
-              <span class="param-icon">🌡️</span>
-              <div class="param-body">
-                <span class="param-label">水温 (Temp)</span>
-                <span class="param-val" id="diagTempVal">提升 1~2°C</span>
-              </div>
+
+            <div class="compass-footer-tip">
+              <span>💡 点击罗盘色块即可查看原版冲煮纠偏处方 · 建议单次仅微调一项变量以精准定位</span>
             </div>
-            <div class="diag-param-chip">
-              <span class="param-icon">💧</span>
-              <div class="param-body">
-                <span class="param-label">粉水比 (Ratio)</span>
-                <span class="param-val" id="diagRatioVal">保持现有比例</span>
-              </div>
+
+            <!-- Attribution & Appreciation Section -->
+            <div class="compass-attribution-box">
+              <div class="attribution-badge-tag">☕ 致敬经典与原著致谢</div>
+              <p class="attribution-desc">
+                本交互风味纠偏罗盘基于世界咖啡大师 <strong>Matt Perger</strong> 及其团队 <strong>Barista Hustle</strong> 经典著作《The Coffee Compass》原创理论模型设计，由 Mindful Drip 实验室进行专业咖啡术语信达雅汉化与全端半盘触控交互重构。
+              </p>
+              <a href="https://www.baristahustle.com/the-coffee-compass/" target="_blank" rel="noopener noreferrer" class="attribution-bh-link">
+                <span>访问 Barista Hustle 官方 Coffee Compass 原著页面</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
             </div>
           </div>
-        </div>
-
-        <div class="compass-footer-tip">
-          <span>💡 点击罗盘色块即可查看原版冲煮纠偏处方 · 建议单次仅微调一项变量以精准定位</span>
-        </div>
-
-        <!-- Attribution & Appreciation Section -->
-        <div class="compass-attribution-box">
-          <div class="attribution-badge-tag">☕ 致敬经典与原著致谢</div>
-          <p class="attribution-desc">
-            本交互风味纠偏罗盘基于世界咖啡大师 <strong>Matt Perger</strong> 及其团队 <strong>Barista Hustle</strong> 经典著作《The Coffee Compass》原创理论模型设计，由 Mindful Drip 实验室进行专业咖啡术语信达雅汉化与移动端触控交互重构。
-          </p>
-          <a href="https://www.baristahustle.com/the-coffee-compass/" target="_blank" rel="noopener noreferrer" class="attribution-bh-link">
-            <span>访问 Barista Hustle 官方 Coffee Compass 原著页面</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-          </a>
         </div>
       </div>
     </div>
@@ -582,7 +591,7 @@
         </div>
         <div class="footer-badge-item" id="appVersionBadge" title="点击检查更新并刷新">
           <span>🏷️</span>
-          <span id="appVersionText">v2.4.3</span>
+          <span id="appVersionText">v2.5.0</span>
           <button class="btn-check-update" id="btnCheckUpdate" aria-label="检查更新" title="强制检查最新版">↻</button>
         </div>
         <div class="footer-badge-item">
@@ -612,6 +621,6 @@
   </div>
 
   <!-- Application Bootstrap -->
-  <script type="module" src="./js/app.js"></script>
+  <script type="module" src="./js/app.js?v=2.5.0"></script>
 </body>
 </html>

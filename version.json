@@ -1,7 +1,8 @@
 {
-  "version": "2.4.3",
-  "build": "20261016.8",
+  "version": "2.5.0",
+  "build": "20261016.9",
   "channel": "production",
   "name": "Mindful Drip Precision Lab",
-  "releaseNotes": "彻底解决拨盘文字倒立问题（动态绝对朝向算法），精品咖啡信达雅风味术语全盘精译，新增 Barista Hustle 官方致谢与出处链接。"
+  "releaseNotes": "全端半盘罗盘大重构（大屏双栏高清晰大字号、移动端防挤压），支持滚轮/触摸丝滑拨盘；重构 PWA 自动版本更新引擎与即时检查机制。"
 }
+

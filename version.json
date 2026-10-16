@@ -1,7 +1,7 @@
 {
-  "version": "2.3.0",
-  "build": "20261016.3",
+  "version": "2.3.1",
+  "build": "20261016.4",
   "channel": "production",
   "name": "Mindful Drip Precision Lab",
-  "releaseNotes": "落地 The Coffee Compass 交互式风味罗盘（双子药丸常驻切换），支持 8 象限萃取诊断与研磨/水温/时间调校处方建议。"
+  "releaseNotes": "Mindful Drip v2.3.1 - 恢复原状，移除临时罗盘刻度盘"
 }

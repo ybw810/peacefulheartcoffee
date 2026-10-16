@@ -278,146 +278,98 @@
         </div>
       </article>
 
-      <!-- TOOL 2: Taste & Stillness (Coffee Compass & SCA Golden Cup) -->
+      <!-- TOOL 2: SCA Golden Cup Compass -->
       <article class="glass-card tool-card" id="cardGolden" role="tabpanel" aria-labelledby="tabGolden" data-tool="golden">
         <div class="card-content">
-
-          <!-- View Switcher: The Coffee Compass vs SCA Model -->
-          <div class="taste-view-switch" role="tablist" aria-label="感官罗盘与仪器模型切换">
-            <button class="taste-subtab-btn active" id="subtabCompass" data-subtab="compass" role="tab" aria-selected="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-              <span>The Coffee Compass (风味罗盘)</span>
-            </button>
-            <button class="taste-subtab-btn" id="subtabSca" data-subtab="sca" role="tab" aria-selected="false">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              <span>SCA 金杯物理模型</span>
-            </button>
+          <!-- Method Selection -->
+          <div class="gold-methods-bar" role="group" aria-label="冲煮方式选择">
+            <button class="gold-method-btn active" data-method="filter">手冲滴滤</button>
+            <button class="gold-method-btn" data-method="immersion">浸润法压</button>
+            <button class="gold-method-btn" data-method="espresso">Espresso 浓缩</button>
           </div>
 
-          <!-- SUBVIEW 1: The Coffee Compass -->
-          <div class="taste-subview active" id="viewCompass">
-            <!-- Quick Flavor Chips -->
-            <div class="compass-quick-bar" id="compassQuickChips" role="group" aria-label="常见风味快捷筛选">
-              <span class="quick-label">⚡ 常见口感:</span>
-              <button type="button" class="compass-quick-btn" data-flavor="bitter">☕ 苦涩</button>
-              <button type="button" class="compass-quick-btn" data-flavor="sour">🍋 尖酸</button>
-              <button type="button" class="compass-quick-btn" data-flavor="watery">💧 寡淡</button>
-              <button type="button" class="compass-quick-btn" data-flavor="astringent">👅 干涩</button>
-              <button type="button" class="compass-quick-btn" data-flavor="heavy">🍯 浓发沉</button>
-              <button type="button" class="compass-quick-btn active" data-flavor="balanced">🎯 平衡</button>
-            </div>
-
-            <!-- Compass Wheel & Needle Viewport -->
-            <div class="compass-wheel-wrap" id="compassWheelContainer" aria-label="咖啡风味校准罗盘转盘">
-              <!-- Rendered via CompassUI -->
-            </div>
-
-            <!-- Diagnosis & Prescription Card -->
-            <div class="compass-diagnosis-card" id="compassDiagnosisCard" aria-live="polite">
-              <!-- Rendered via CompassUI -->
-            </div>
-
-            <!-- Collapsible full flavor dictionary -->
-            <details class="compass-flavor-details">
-              <summary class="compass-flavor-summary">📖 查看罗盘完整 40+ 细分风味词典 ▾</summary>
-              <div class="compass-flavor-list-wrap" id="compassFlavorListWrap">
-                <!-- Rendered dynamically -->
+          <!-- 4 Core Parameters -->
+          <div class="gold-inputs-grid">
+            <div class="matrix-field">
+              <label for="goldTds" class="field-label">TDS 浓度</label>
+              <div class="input-container">
+                <input id="goldTds" type="number" class="app-input" value="1.35" min="0.1" max="25" step="0.01" inputmode="decimal" />
+                <span class="input-unit">%</span>
               </div>
-            </details>
+            </div>
+
+            <div class="matrix-field">
+              <label for="goldDose" class="field-label">咖啡粉重</label>
+              <div class="input-container">
+                <input id="goldDose" type="number" class="app-input" value="15" min="1" max="100" step="0.1" inputmode="decimal" />
+                <span class="input-unit">g</span>
+              </div>
+            </div>
+
+            <div class="matrix-field">
+              <label for="goldWater" class="field-label">注水总量</label>
+              <div class="input-container">
+                <input id="goldWater" type="number" class="app-input" value="240" min="10" max="2000" step="1" inputmode="decimal" />
+                <span class="input-unit">g</span>
+              </div>
+            </div>
+
+            <div class="matrix-field">
+              <label for="goldLiquid" class="field-label">咖啡液重</label>
+              <div class="input-container">
+                <input id="goldLiquid" type="number" class="app-input" value="210" min="5" max="2000" step="1" inputmode="decimal" />
+                <span class="input-unit">g</span>
+              </div>
+            </div>
           </div>
 
-          <!-- SUBVIEW 2: SCA Golden Cup Model -->
-          <div class="taste-subview" id="viewSca">
-            <!-- Method Selection -->
-            <div class="gold-methods-bar" role="group" aria-label="冲煮方式选择">
-              <button class="gold-method-btn active" data-method="filter">手冲滴滤</button>
-              <button class="gold-method-btn" data-method="immersion">浸润法压</button>
-              <button class="gold-method-btn" data-method="espresso">Espresso 浓缩</button>
+          <!-- Output Metrics Summary -->
+          <div class="metrics-summary-grid">
+            <div class="metric-card">
+              <div class="metric-card-label">萃取率 (EXT)</div>
+              <div class="metric-card-value" id="extResult">18.9<small>%</small></div>
             </div>
 
-            <!-- 4 Core Parameters -->
-            <div class="gold-inputs-grid">
-              <div class="matrix-field">
-                <label for="goldTds" class="field-label">TDS 浓度</label>
-                <div class="input-container">
-                  <input id="goldTds" type="number" class="app-input" value="1.35" min="0.1" max="25" step="0.01" inputmode="decimal" />
-                  <span class="input-unit">%</span>
-                </div>
-              </div>
+            <div class="metric-card">
+              <div class="metric-card-label">实际粉水比</div>
+              <div class="metric-card-value" id="ratioResult">1:16.0</div>
+            </div>
+          </div>
 
-              <div class="matrix-field">
-                <label for="goldDose" class="field-label">咖啡粉重</label>
-                <div class="input-container">
-                  <input id="goldDose" type="number" class="app-input" value="15" min="1" max="100" step="0.1" inputmode="decimal" />
-                  <span class="input-unit">g</span>
-                </div>
-              </div>
-
-              <div class="matrix-field">
-                <label for="goldWater" class="field-label">注水总量</label>
-                <div class="input-container">
-                  <input id="goldWater" type="number" class="app-input" value="240" min="10" max="2000" step="1" inputmode="decimal" />
-                  <span class="input-unit">g</span>
-                </div>
-              </div>
-
-              <div class="matrix-field">
-                <label for="goldLiquid" class="field-label">咖啡液重</label>
-                <div class="input-container">
-                  <input id="goldLiquid" type="number" class="app-input" value="210" min="5" max="2000" step="1" inputmode="decimal" />
-                  <span class="input-unit">g</span>
-                </div>
+          <!-- Dynamic SCA Coordinate Rail -->
+          <section class="sca-chart-card" aria-label="金杯萃取落点图">
+            <div class="sca-verdict-header">
+              <div class="sca-verdict-title" id="verdictTitle">🎯 完美落在 SCA 黄金杯核心区间</div>
+              <div class="sca-verdict-target" id="verdictTarget">
+                目标 EXT: 18–22%<br />目标 TDS: 1.15–1.35%
               </div>
             </div>
 
-            <!-- Output Metrics Summary -->
-            <div class="metrics-summary-grid">
-              <div class="metric-card">
-                <div class="metric-card-label">萃取率 (EXT)</div>
-                <div class="metric-card-value" id="extResult">18.9<small>%</small></div>
-              </div>
-
-              <div class="metric-card">
-                <div class="metric-card-label">实际粉水比</div>
-                <div class="metric-card-value" id="ratioResult">1:16.0</div>
+            <div class="sca-rail-viewport">
+              <div class="sca-rail-track">
+                <div class="sca-cursor-dot" id="scaCursorDot"></div>
               </div>
             </div>
 
-            <!-- Dynamic SCA Coordinate Rail -->
-            <section class="sca-chart-card" aria-label="金杯萃取落点图">
-              <div class="sca-verdict-header">
-                <div class="sca-verdict-title" id="verdictTitle">🎯 完美落在 SCA 黄金杯核心区间</div>
-                <div class="sca-verdict-target" id="verdictTarget">
-                  目标 EXT: 18–22%<br />目标 TDS: 1.15–1.35%
-                </div>
-              </div>
-
-              <div class="sca-rail-viewport">
-                <div class="sca-rail-track">
-                  <div class="sca-cursor-dot" id="scaCursorDot"></div>
-                </div>
-              </div>
-
-              <div class="sca-rail-labels">
-                <span>欠萃区 (&lt;18%)</span>
-                <span style="color: var(--amber-gold); font-weight: 600;">SCA 黄金平衡带 (18% - 22%)</span>
-                <span>过萃区 (&gt;22%)</span>
-              </div>
-
-              <div class="sca-diagnosis-note" id="diagnosisNote">
-                风味极其均衡！甜感、酸质与醇厚度达到黄金平衡点，杂味与干涩感极低。
-              </div>
-            </section>
-
-            <!-- Golden Formula Breakdown -->
-            <div class="sync-tip">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
-              <span>科学计算公式：萃取率 EXT% = TDS(%) × 萃取液重(g) ÷ 咖啡粉重(g)</span>
+            <div class="sca-rail-labels">
+              <span>欠萃区 (&lt;18%)</span>
+              <span style="color: var(--amber-gold); font-weight: 600;">SCA 黄金平衡带 (18% - 22%)</span>
+              <span>过萃区 (&gt;22%)</span>
             </div>
+
+            <div class="sca-diagnosis-note" id="diagnosisNote">
+              风味极其均衡！甜感、酸质与醇厚度达到黄金平衡点，杂味与干涩感极低。
+            </div>
+          </section>
+
+          <!-- Golden Formula Breakdown -->
+          <div class="sync-tip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>科学计算公式：萃取率 EXT% = TDS(%) × 萃取液重(g) ÷ 咖啡粉重(g)</span>
           </div>
 
         </div>
@@ -500,7 +452,7 @@
         </div>
         <div class="footer-badge-item" id="appVersionBadge" title="点击检查更新并刷新">
           <span>🏷️</span>
-          <span id="appVersionText">v2.3.0</span>
+          <span id="appVersionText">v2.3.1</span>
           <button class="btn-check-update" id="btnCheckUpdate" aria-label="检查更新" title="强制检查最新版">↻</button>
         </div>
         <div class="footer-badge-item">

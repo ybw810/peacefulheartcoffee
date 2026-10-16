@@ -5,7 +5,6 @@
 import { BrewCalculator } from './brew-calc.js';
 import { BrewTimer } from './timer.js';
 import { GoldenCupCalculator } from './golden-cup.js';
-import { CompassUI } from './compass-ui.js';
 import { CommunityQRModal } from './qr-modal.js';
 import { registerPWA } from './pwa-register.js';
 
@@ -78,8 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     getStages: () => brewCalc.getStages()
   });
 
-  // 5. Initialize The Coffee Compass & SCA Golden Cup Calculator
-  const compassUI = new CompassUI();
+  // 5. Initialize SCA Golden Cup Calculator
   const goldenCup = new GoldenCupCalculator({
     tdsId: 'goldTds',
     doseId: 'goldDose',

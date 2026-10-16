@@ -2,7 +2,7 @@
  * Mindful Drip - PWA Registration & Version Control Engine
  */
 
-const CURRENT_VERSION = '2.3.0';
+const CURRENT_VERSION = '2.2.0';
 
 export function registerPWA() {
   let swRegistration = null;

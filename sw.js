@@ -1,9 +1,9 @@
 /**
- * Mindful Drip - PWA Service Worker (v2.3.0)
+ * Mindful Drip - PWA Service Worker (v2.2.0)
  * Intelligent Network-First for Navigation, Stale-While-Revalidate for Assets
  */
 
-const CACHE_NAME = 'mindful-drip-v2.3.0';
+const CACHE_NAME = 'mindful-drip-v2.3.1';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -13,8 +13,6 @@ const ASSETS_TO_CACHE = [
   './css/design-tokens.css',
   './css/app.css',
   './js/app.js',
-  './js/compass-ui.js',
-  './plugins/coffee-compass/compass-engine.js',
   './js/brew-calc.js',
   './js/timer.js',
   './js/golden-cup.js',
@@ -30,7 +28,7 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing Mindful Drip v2.3.0...');
+  console.log('[Service Worker] Installing Mindful Drip v2.2.0...');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[Service Worker] Pre-caching offline assets');

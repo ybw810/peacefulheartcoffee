@@ -1,7 +1,7 @@
 {
-  "version": "2.4.2",
-  "build": "20261016.7",
+  "version": "2.4.3",
+  "build": "20261016.8",
   "channel": "production",
   "name": "Mindful Drip Precision Lab",
-  "releaseNotes": "全新支持小屏幕移动端半弧拨盘布局 (Half-Wheel Mobile Mode)，触控轻扫流畅旋钮与磁吸对齐诊断处方。"
+  "releaseNotes": "彻底解决拨盘文字倒立问题（动态绝对朝向算法），精品咖啡信达雅风味术语全盘精译，新增 Barista Hustle 官方致谢与出处链接。"
 }

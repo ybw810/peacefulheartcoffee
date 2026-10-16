@@ -1394,7 +1394,7 @@ body::after {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 2px 9px;
+  padding: 3px 10px;
   border-radius: 999px;
   font-size: 0.65rem;
   font-weight: 700;
@@ -1403,6 +1403,14 @@ body::after {
   color: var(--emerald-teal);
   border: 1px solid rgba(16, 185, 129, 0.25);
   margin-bottom: 6px;
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.compass-title-badge:hover {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: var(--emerald-teal);
+  transform: translateY(-1px);
 }
 
 .compass-search-section {
@@ -1687,6 +1695,56 @@ body::after {
   color: var(--ink-tertiary);
   text-align: center;
   line-height: 1.4;
+}
+
+.compass-attribution-box {
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.attribution-badge-tag {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--amber-gold);
+  letter-spacing: 0.03em;
+}
+
+.attribution-desc {
+  font-size: 0.72rem;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.attribution-desc strong {
+  color: var(--ink-primary);
+}
+
+.attribution-bh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--emerald-teal);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.attribution-bh-link:hover {
+  color: var(--amber-gold);
+  text-decoration: underline;
 }
 
 /* Toast Actions */

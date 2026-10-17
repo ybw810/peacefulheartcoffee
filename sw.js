@@ -1,27 +1,27 @@
 /**
- * Mindful Drip - PWA Service Worker (v2.5.5)
+ * Mindful Drip - PWA Service Worker (v2.5.6)
  * Intelligent Network-First for Navigation, Stale-While-Revalidate for Assets
  */
 
-const CACHE_NAME = 'mindful-drip-v2.5.5';
+const CACHE_NAME = 'mindful-drip-v2.5.6';
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './css/design-tokens.css?v=2.5.5',
-  './css/app.css?v=2.5.5',
-  './js/app.js?v=2.5.5',
-  './js/brew-calc.js?v=2.5.5',
-  './js/timer.js?v=2.5.5',
-  './js/golden-cup.js?v=2.5.5',
-  './js/compass-bh.js?v=2.5.5',
-  './js/qr-modal.js?v=2.5.5',
-  './js/pwa-register.js?v=2.5.5',
+  './css/design-tokens.css?v=2.5.6',
+  './css/app.css?v=2.5.6',
+  './js/app.js?v=2.5.6',
+  './js/brew-calc.js?v=2.5.6',
+  './js/timer.js?v=2.5.6',
+  './js/golden-cup.js?v=2.5.6',
+  './js/compass-bh.js?v=2.5.6',
+  './js/qr-modal.js?v=2.5.6',
+  './js/pwa-register.js?v=2.5.6',
+  './og-image.png',
   './favicon.ico',
   './favicon.svg',
   './apple-touch-icon.png',
-  './apple-touch-icon-precomposed.png',
   './touch-icon.png',
   './favicon-32x32.png',
   './favicon-16x16.png',
@@ -30,15 +30,16 @@ const ASSETS_TO_CACHE = [
   './assets/icons/icon-512.png',
   './assets/icons/icon-maskable.png',
   './assets/icons/apple-touch-icon.png',
+  './assets/icons/og-image.png',
   './assets/qr/official-account.png',
   './assets/qr/mini-program.png'
 ];
 
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing Mindful Drip v2.5.1...');
+  console.log('[Service Worker] Installing Mindful Drip v2.5.6...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      console.log('[Service Worker] Pre-caching offline assets for v2.5.1');
+      console.log('[Service Worker] Pre-caching offline assets for v2.5.6');
       // Resilient pre-caching: cache assets individually so one failure does not break the entire SW
       await Promise.allSettled(
         ASSETS_TO_CACHE.map(url => cache.add(url).catch(err => console.warn('[SW Pre-cache Error]', url, err)))
@@ -48,7 +49,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating Mindful Drip v2.5.1...');
+  console.log('[Service Worker] Activating Mindful Drip v2.5.6...');
   event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(

@@ -1,8 +1,8 @@
 {
-  "version": "2.5.5",
-  "build": "20261016.14",
+  "version": "2.5.6",
+  "build": "20261017.01",
   "channel": "production",
   "name": "Peaceful Heart Coffee · Mindful Drip Precision Lab",
-  "releaseNotes": "彻底解决 iOS Safari 分享面板图标缩小白边问题：基于 Apple HIG 规范重构 100% 满幅直角 RGB 原生应用级 apple-touch-icon 与多分辨率 favicon.ico，根目录物理文件部署，消除 SPA 路由拦截并补全 Open Graph 社交元数据。"
+  "releaseNotes": "全面升级现代 Meta 规范与 1200×630 Open Graph 大图富预览：部署 1.91:1 宽幅社交横幅，精简废弃标签，解决 iOS Safari 分享面板图标缩小白边问题并展现原生大图卡片；保持全平台双重 PWA 能力与离线高可用。"
 }
 

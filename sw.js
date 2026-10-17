@@ -9,15 +9,15 @@ const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './css/design-tokens.css?v=1.0.0',
-  './css/app.css?v=1.0.0',
-  './js/app.js?v=1.0.0',
-  './js/brew-calc.js?v=1.0.0',
-  './js/timer.js?v=1.0.0',
-  './js/golden-cup.js?v=1.0.0',
-  './js/compass-bh.js?v=1.0.0',
-  './js/qr-modal.js?v=1.0.0',
-  './js/pwa-register.js?v=1.0.0',
+  './css/design-tokens.css?v=1.0.1',
+  './css/app.css?v=1.0.1',
+  './js/app.js?v=1.0.1',
+  './js/brew-calc.js?v=1.0.1',
+  './js/timer.js?v=1.0.1',
+  './js/golden-cup.js?v=1.0.1',
+  './js/compass-bh.js?v=1.0.1',
+  './js/qr-modal.js?v=1.0.1',
+  './js/pwa-register.js?v=1.0.1',
   './og-image.png',
   './favicon.ico',
   './favicon.svg',
@@ -36,10 +36,10 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing Mindful Drip v1.0.0...');
+  console.log('[Service Worker] Installing Mindful Drip v1.0.1...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      console.log('[Service Worker] Pre-caching offline assets for v1.0.0');
+      console.log('[Service Worker] Pre-caching offline assets for v1.0.1');
       // Resilient pre-caching: cache assets individually so one failure does not break the entire SW
       await Promise.allSettled(
         ASSETS_TO_CACHE.map(url => cache.add(url).catch(err => console.warn('[SW Pre-cache Error]', url, err)))
@@ -49,7 +49,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating Mindful Drip v1.0.0...');
+  console.log('[Service Worker] Activating Mindful Drip v1.0.1...');
   event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(

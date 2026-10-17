@@ -1,8 +1,8 @@
 {
-  "version": "2.5.6",
-  "build": "20261017.01",
+  "version": "1.0.0",
+  "build": "20261017.101",
   "channel": "production",
   "name": "Peaceful Heart Coffee · Mindful Drip Precision Lab",
-  "releaseNotes": "全面升级现代 Meta 规范与 1200×630 Open Graph 大图富预览：部署 1.91:1 宽幅社交横幅，精简废弃标签，解决 iOS Safari 分享面板图标缩小白边问题并展现原生大图卡片；保持全平台双重 PWA 能力与离线高可用。"
+  "releaseNotes": "新增「🧊 急冷冰手冲 (Japanese Flash Brew)」专业功能：集成 James Hoffmann 60:40 黄金急冷比、前街 10:5 馆藏比与 5:5 清爽比；智能计算下壶急冷冰块与手冲热水分配；动态注水指引与阶段计时提示；自适应双色比例指示条。"
 }
 

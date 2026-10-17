@@ -256,7 +256,11 @@ export class BrewTimer {
 
     const curStage = stages[currentIdx];
     if (this.elapsed === 0 && !this.timerId) {
-      this.stageBadge.textContent = '准备注水 · 点击开始';
+      if (curStage && curStage.note && curStage.note.includes('冰块')) {
+        this.stageBadge.textContent = '准备：' + curStage.note + ' · 点击开始';
+      } else {
+        this.stageBadge.textContent = '准备注水 · 点击开始';
+      }
     } else {
       this.stageBadge.textContent = `${curStage.name} · ${curStage.note}`;
     }

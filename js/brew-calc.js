@@ -13,6 +13,16 @@ export const BrewPresets = {
     scheme: 'classic3',
     notes: '明亮酸质，层次分明'
   },
+  iced_v60: {
+    id: 'iced_v60',
+    name: '🧊 急冷冰手冲',
+    ratio: 15.0,
+    dose: 15.0,
+    temp: '93-95°C',
+    grind: '中细偏细研磨 (600-750μm)',
+    scheme: 'ice_flash',
+    notes: '下壶置冰急速冷却，锁住奔放花果香与明亮酸质'
+  },
   kalita: {
     id: 'kalita',
     name: 'Kalita 蛋糕滤杯',
@@ -89,6 +99,21 @@ export class BrewCalculator {
     this.physicsYield = document.getElementById('physicsYield');
     this.physicsRetention = document.getElementById('physicsRetention');
 
+    // Ice Split elements
+    this.iceSplitCard = document.getElementById('iceSplitCard');
+    this.iceWeightVal = document.getElementById('iceWeightVal');
+    this.hotWaterVal = document.getElementById('hotWaterVal');
+    this.hotPctBadge = document.getElementById('hotPctBadge');
+    this.icePctBadge = document.getElementById('icePctBadge');
+    this.iceRatioDesc = document.getElementById('iceRatioDesc');
+    this.hotRatioDesc = document.getElementById('hotRatioDesc');
+    this.hotWaterBar = document.getElementById('hotWaterBar');
+    this.iceBar = document.getElementById('iceBar');
+    this.hotSegLabel = document.getElementById('hotSegLabel');
+    this.iceSegLabel = document.getElementById('iceSegLabel');
+    this.iceTipNote = document.getElementById('iceTipNote');
+    this.iceSplitMode = '6:4'; // '6:4' | '10:5' | '5:5'
+
     this.currentPreset = 'v60';
     this.currentScheme = 'classic3';
     this.recentKeys = ['dose', 'water'];
@@ -122,11 +147,25 @@ export class BrewCalculator {
       });
     });
 
+    // Ice split mode pill switcher
+    document.querySelectorAll('.ice-mode-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.ice-mode-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        this.iceSplitMode = pill.dataset.split || '6:4';
+        this.updateIceSplitUI();
+        this.updatePhysics();
+        this.updateStages();
+      });
+    });
+
     // Scheme select change
     if (this.schemeSelect) {
       this.schemeSelect.addEventListener('change', () => {
         this.currentScheme = this.schemeSelect.value;
         this.updateSchemeDisplay();
+        this.updateIceSplitUI();
+        this.updatePhysics();
         this.updateStages();
       });
       this.updateSchemeDisplay();
@@ -134,6 +173,89 @@ export class BrewCalculator {
 
     // Initial calculation
     this.recalculate('water');
+  }
+
+  isIcedMode() {
+    return this.currentPreset === 'iced_v60' ||
+           this.currentScheme === 'ice_flash' ||
+           this.currentScheme === 'ice_kasuya';
+  }
+
+  calculateIceSplit(totalWater, dose) {
+    let iceRatio = 0.40;
+    let hotRatio = 0.60;
+    let iceGrams = 0;
+    let hotGrams = 0;
+
+    if (this.iceSplitMode === '10:5') {
+      // 10:5 ratio (Hot:Ice = 2:1 => 66.7% hot, 33.3% ice)
+      iceRatio = 1 / 3;
+      hotRatio = 2 / 3;
+      iceGrams = Math.round(totalWater * (1 / 3));
+      hotGrams = Math.max(0, totalWater - iceGrams);
+    } else if (this.iceSplitMode === '5:5') {
+      // 5:5 ratio (50% hot, 50% ice)
+      iceRatio = 0.50;
+      hotRatio = 0.50;
+      iceGrams = Math.round(totalWater * 0.50);
+      hotGrams = Math.max(0, totalWater - iceGrams);
+    } else {
+      // Default 6:4 (James Hoffmann Golden Ratio: 60% hot water, 40% ice)
+      iceRatio = 0.40;
+      hotRatio = 0.60;
+      iceGrams = Math.round(totalWater * 0.40);
+      hotGrams = Math.max(0, totalWater - iceGrams);
+    }
+
+    return {
+      iceGrams,
+      hotGrams,
+      icePercent: Math.round(iceRatio * 100),
+      hotPercent: Math.round(hotRatio * 100)
+    };
+  }
+
+  updateIceSplitUI() {
+    const isIced = this.isIcedMode();
+    if (this.iceSplitCard) {
+      this.iceSplitCard.classList.toggle('visible', isIced);
+    }
+    if (!isIced) return;
+
+    const totalWater = this.parse(this.waterInput) || 225;
+    const dose = this.parse(this.doseInput) || 15;
+    const split = this.calculateIceSplit(totalWater, dose);
+
+    if (this.iceWeightVal) this.iceWeightVal.textContent = split.iceGrams;
+    if (this.hotWaterVal) this.hotWaterVal.textContent = split.hotGrams;
+
+    if (this.hotPctBadge) this.hotPctBadge.textContent = `${split.hotPercent}%`;
+    if (this.icePctBadge) this.icePctBadge.textContent = `${split.icePercent}%`;
+
+    if (this.iceRatioDesc) {
+      this.iceRatioDesc.textContent = `占总水量 ${split.icePercent}% · 预置于分享壶`;
+    }
+    if (this.hotRatioDesc) {
+      this.hotRatioDesc.textContent = `占总水量 ${split.hotPercent}% · 滤杯冲煮总水`;
+    }
+
+    if (this.hotWaterBar) {
+      this.hotWaterBar.style.width = `${split.hotPercent}%`;
+    }
+    if (this.iceBar) {
+      this.iceBar.style.width = `${split.icePercent}%`;
+    }
+
+    if (this.hotSegLabel) {
+      this.hotSegLabel.textContent = `♨️ 热水 ${split.hotGrams}g (${split.hotPercent}%)`;
+    }
+    if (this.iceSegLabel) {
+      this.iceSegLabel.textContent = `🧊 冰块 ${split.iceGrams}g (${split.icePercent}%)`;
+    }
+
+    if (this.iceTipNote) {
+      this.iceTipNote.innerHTML = `<span>💡 <strong>冲煮指引</strong>：先在下壶放入 <strong>${split.iceGrams}g 冰块</strong> 并架上滤杯归零；手冲壶注入 <strong>${split.hotGrams}g 热水</strong> 即可萃取完毕！</span>`;
+    }
   }
 
   updateSchemeDisplay() {
@@ -226,6 +348,7 @@ export class BrewCalculator {
       this.doseInput.value = this.format(w / r, 1);
     }
 
+    this.updateIceSplitUI();
     this.updatePhysics();
     this.updateStages();
   }
@@ -240,9 +363,16 @@ export class BrewCalculator {
     if (this.physicsYield) this.physicsYield.textContent = `${yieldLiquid} g`;
     if (this.physicsRetention) this.physicsRetention.textContent = `${retained} g`;
     if (this.physicsFlow) {
-      // Estimated flow rate for pour-over target time (~150s)
-      const flow = (water / 150).toFixed(2);
-      this.physicsFlow.textContent = `${flow} g/s`;
+      if (this.isIcedMode()) {
+        const split = this.calculateIceSplit(water, dose);
+        // Iced hot brew target time is typically ~75s
+        const flow = (split.hotGrams / 75).toFixed(2);
+        this.physicsFlow.textContent = `${flow} g/s (热)`;
+      } else {
+        // Estimated flow rate for pour-over target time (~150s)
+        const flow = (water / 150).toFixed(2);
+        this.physicsFlow.textContent = `${flow} g/s`;
+      }
     }
   }
 
@@ -250,7 +380,32 @@ export class BrewCalculator {
     const totalWater = this.parse(this.waterInput) || 240;
     const dose = this.parse(this.doseInput) || 15;
 
-    if (this.currentScheme === 'kasuya46') {
+    if (this.currentScheme === 'ice_flash') {
+      const split = this.calculateIceSplit(totalWater, dose);
+      const H = split.hotGrams;
+      const I = split.iceGrams;
+      const bloom = Math.round(H * 0.25);
+      const stage1 = Math.round(H * 0.65);
+      return [
+        { time: 0, timeLabel: '0:00', name: '准备与闷蒸 (Bloom)', target: bloom, note: `下壶预置 ${I}g 冰块 · 注入热水至 ${bloom}g` },
+        { time: 35, timeLabel: '0:35', name: '第一段注水 (Body)', target: stage1, note: `中心向外绕圈注入热水至 ${stage1}g` },
+        { time: 70, timeLabel: '1:10', name: '第二段注水 (Finish)', target: H, note: `慢速平稳注入热水至 ${H}g (完成注水)` },
+        { time: 105, timeLabel: '1:45', name: '滴滤结束与急冷摇匀', target: totalWater, note: '移开滤杯 · 充分摇晃分享壶使冰液急冷融合' }
+      ];
+    } else if (this.currentScheme === 'ice_kasuya') {
+      const split = this.calculateIceSplit(totalWater, dose);
+      const H = split.hotGrams;
+      const I = split.iceGrams;
+      const p = Math.round(H / 5);
+      return [
+        { time: 0, timeLabel: '0:00', name: '第 1 段 (酸质定型)', target: p, note: `下壶预置 ${I}g 冰块 · 注热水至 ${p}g` },
+        { time: 45, timeLabel: '0:45', name: '第 2 段 (甜感平衡)', target: p * 2, note: `注水至 ${p * 2}g (等待流干)` },
+        { time: 90, timeLabel: '1:30', name: '第 3 段 (浓度萃取 1)', target: p * 3, note: `注水至 ${p * 3}g` },
+        { time: 135, timeLabel: '2:15', name: '第 4 段 (浓度萃取 2)', target: p * 4, note: `注水至 ${p * 4}g` },
+        { time: 180, timeLabel: '3:00', name: '第 5 段 (尾段定型)', target: H, note: `注水至 ${H}g · 等待完全流干` },
+        { time: 215, timeLabel: '3:35', name: '急冷摇匀享用', target: totalWater, note: '移开滤杯 · 大力摇晃下壶使冰液充分融合降温' }
+      ];
+    } else if (this.currentScheme === 'kasuya46') {
       // 4:6 Method: 5 equal pours of totalWater / 5
       const p = Math.round(totalWater / 5);
       return [

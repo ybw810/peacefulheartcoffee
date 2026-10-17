@@ -14,15 +14,15 @@
   <meta property="og:url" content="https://www.peacefulheartcoffee.com/" />
   <meta property="og:title" content="Mindful Drip 极客咖啡萃取与风味罗盘" />
   <meta property="og:description" content="心灵的安宁咖啡 (Peaceful Heart Coffee) 官方出品：极客咖啡风味与萃取计算器，支持智能粉水比三向解算、分段注水精准计时、SCA 金杯萃取率罗盘与 PWA 离线运行。" />
-  <meta property="og:image" content="https://www.peacefulheartcoffee.com/og-image.png?v=2.5.6" />
-  <meta property="og:image:secure_url" content="https://www.peacefulheartcoffee.com/og-image.png?v=2.5.6" />
+  <meta property="og:image" content="https://www.peacefulheartcoffee.com/og-image.png?v=1.0.0" />
+  <meta property="og:image:secure_url" content="https://www.peacefulheartcoffee.com/og-image.png?v=1.0.0" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mindful Drip 极客咖啡萃取与风味罗盘" />
   <meta name="twitter:description" content="心灵的安宁咖啡官方出品 · 极客咖啡风味与萃取计算器" />
-  <meta name="twitter:image" content="https://www.peacefulheartcoffee.com/og-image.png?v=2.5.6" />
+  <meta name="twitter:image" content="https://www.peacefulheartcoffee.com/og-image.png?v=1.0.0" />
 
   <!-- PWA & Mobile Web Capabilities -->
   <link rel="manifest" href="/manifest.webmanifest" />
@@ -49,11 +49,11 @@
   <!-- 现代高精图标体系 (iOS HIG & W3C 标准) -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2.5.6" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1.0.0" />
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="./css/design-tokens.css?v=2.5.6" />
-  <link rel="stylesheet" href="./css/app.css?v=2.5.6" />
+  <link rel="stylesheet" href="./css/design-tokens.css?v=1.0.0" />
+  <link rel="stylesheet" href="./css/app.css?v=1.0.0" />
 </head>
 <body>
 
@@ -146,6 +146,7 @@
             </div>
             <div class="presets-scroll">
               <button class="preset-chip active" data-preset="v60">V60 手冲</button>
+              <button class="preset-chip" data-preset="iced_v60">🧊 急冷冰手冲</button>
               <button class="preset-chip" data-preset="kalita">Kalita 蛋糕</button>
               <button class="preset-chip" data-preset="aeropress">爱乐压</button>
               <button class="preset-chip" data-preset="frenchpress">法压壶</button>
@@ -205,6 +206,60 @@
             <span>智能三向联动：任意调整两项，第三项自动实时平滑跟随。</span>
           </div>
 
+          <!-- Ice & Water Split Allocation Card (Shown in Iced Pour-Over mode) -->
+          <div class="ice-split-card" id="iceSplitCard" aria-label="冰手冲冰水配比指示器">
+            <div class="ice-split-header">
+              <div class="ice-split-title">
+                <span class="ice-icon-badge">🧊</span>
+                <div>
+                  <div class="ice-title-text">急冷冰手冲 · 冰水智能分配</div>
+                  <div class="ice-subtitle-text">下壶冰块急速锁香 · 融冰计算纳入总水量</div>
+                </div>
+              </div>
+              <div class="ice-mode-pills" role="radiogroup" aria-label="选择冰水分配模式">
+                <button type="button" class="ice-mode-pill active" data-split="6:4" title="60% 热水萃取 + 40% 下壶冰块 (James Hoffmann 推荐)">6:4 黄金急冷</button>
+                <button type="button" class="ice-mode-pill" data-split="10:5" title="粉 1 : 水 10 : 冰 5 (经典咖啡馆甜感比)">10:5 馆藏</button>
+                <button type="button" class="ice-mode-pill" data-split="5:5" title="50% 热水 + 50% 冰块 (极清爽果茶感)">5:5 清爽</button>
+              </div>
+            </div>
+
+            <div class="ice-split-grid">
+              <!-- Left: Hot Brew Water -->
+              <div class="ice-split-stat hot-brew-stat">
+                <div class="ice-stat-header">
+                  <div class="ice-stat-title-wrap">
+                    <span class="ice-stat-dot hot-dot"></span>
+                    <span class="ice-stat-label">手冲壶注热水 (Brew Water)</span>
+                  </div>
+                  <span class="ice-stat-badge hot-badge" id="hotPctBadge">60%</span>
+                </div>
+                <div class="ice-stat-value">
+                  <span id="hotWaterVal">135</span><span class="ice-stat-unit">g</span>
+                </div>
+                <div class="ice-stat-desc" id="hotRatioDesc">占总水量 60% · 滤杯冲煮总水</div>
+              </div>
+
+              <!-- Right: Server Ice -->
+              <div class="ice-split-stat ice-server-stat">
+                <div class="ice-stat-header">
+                  <div class="ice-stat-title-wrap">
+                    <span class="ice-stat-dot ice-dot"></span>
+                    <span class="ice-stat-label">下壶预置冰块 (Server Ice)</span>
+                  </div>
+                  <span class="ice-stat-badge ice-badge" id="icePctBadge">40%</span>
+                </div>
+                <div class="ice-stat-value">
+                  <span id="iceWeightVal">90</span><span class="ice-stat-unit">g</span>
+                </div>
+                <div class="ice-stat-desc" id="iceRatioDesc">占总水量 40% · 预置于分享壶</div>
+              </div>
+            </div>
+
+            <div class="ice-tip-note" id="iceTipNote">
+              <span>💡 <strong>冲煮指引</strong>：先在下壶放入 <strong>90g 冰块</strong> 并架上滤杯归零；手冲壶注入 <strong>135g 热水</strong> 即可萃取完毕！</span>
+            </div>
+          </div>
+
           <!-- Extraction Scheme Bar (Two-line Layout) -->
           <div class="scheme-bar" id="schemeBar">
             <div class="scheme-label-col">
@@ -221,6 +276,8 @@
               </div>
               <select id="selectScheme" class="scheme-native-select" aria-label="选择注水分段方案">
                 <option value="classic3" data-name="经典三段式" data-desc="20% 闷蒸 · 40% 核心 · 40% 尾段">经典三段式 (20% 闷蒸 · 40% 核心 · 40% 尾段)</option>
+                <option value="ice_flash" data-name="急冷三段式 (冰手冲)" data-desc="25% 闷蒸 · 40% 核心 · 35% 尾段 · 摇匀">急冷三段式 (25% 闷蒸 · 40% 核心 · 35% 尾段 · 摇匀)</option>
+                <option value="ice_kasuya" data-name="粕谷哲 4:6 冰手冲法" data-desc="大粉量粗研磨 · 5段注水 · 冰液急冷">粕谷哲 4:6 冰手冲法 (大粉量粗研磨 · 5段注水 · 冰液急冷)</option>
                 <option value="kasuya46" data-name="粕谷哲 4:6 法" data-desc="前40%定酸甜 · 后60%定浓度">粕谷哲 4:6 法 (前40%定酸甜 · 后60%定浓度)</option>
                 <option value="aeropress" data-name="爱乐压浸泡下压法" data-desc="搅拌 10s · 浸泡 · 匀速下压">爱乐压浸泡下压法 (搅拌 10s · 浸泡 · 匀速下压)</option>
                 <option value="immersion" data-name="法压壶浸润萃取法" data-desc="注水 · 破渣 · 下压">法压壶浸润萃取法 (注水 · 破渣 · 下压)</option>
@@ -623,7 +680,7 @@
         </div>
         <div class="footer-badge-item" id="appVersionBadge" title="点击检查更新并刷新">
           <span>🏷️</span>
-          <span id="appVersionText">v2.5.6</span>
+          <span id="appVersionText">v1.0.0</span>
           <button class="btn-check-update" id="btnCheckUpdate" aria-label="检查更新" title="强制检查最新版">↻</button>
         </div>
         <div class="footer-badge-item">
@@ -653,6 +710,6 @@
   </div>
 
   <!-- Application Bootstrap -->
-  <script type="module" src="./js/app.js?v=2.5.6"></script>
+  <script type="module" src="./js/app.js?v=1.0.0"></script>
 </body>
 </html>

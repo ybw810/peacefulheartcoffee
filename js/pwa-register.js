@@ -1,8 +1,8 @@
 /**
- * Mindful Drip - PWA Registration & Version Control Engine (v1.0.1)
+ * Mindful Drip - PWA Registration & Version Control Engine (v1.0.2)
  */
 
-export const APP_BUILD_VERSION = '1.0.1';
+export const APP_BUILD_VERSION = '1.0.2';
 
 export function registerPWA() {
   let swRegistration = null;

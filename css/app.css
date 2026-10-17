@@ -862,6 +862,18 @@ body::after {
   border-color: var(--amber-gold);
 }
 
+.scheme-bar.single-scheme {
+  cursor: default;
+}
+
+.scheme-bar.single-scheme:hover {
+  border-color: var(--glass-border);
+}
+
+.scheme-bar.single-scheme .scheme-line-method svg {
+  display: none;
+}
+
 .scheme-label-col {
   display: flex;
   flex-direction: column;

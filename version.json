@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "build": "20261017.101",
+  "build": "20261017.102",
   "channel": "production",
   "name": "Peaceful Heart Coffee · Mindful Drip Precision Lab",
   "releaseNotes": "新增「🧊 急冷冰手冲 (Japanese Flash Brew)」专业功能：集成 James Hoffmann 60:40 黄金急冷比、前街 10:5 馆藏比与 5:5 清爽比；智能计算下壶急冷冰块与手冲热水分配；动态注水指引与阶段计时提示；自适应双色比例指示条。"

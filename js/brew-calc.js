@@ -2,6 +2,49 @@
  * Peaceful Heart Coffee - Brewing Calculator & Scheme Engine
  */
 
+export const BrewSchemes = {
+  classic3: {
+    id: 'classic3',
+    name: '经典三段式',
+    desc: '20% 闷蒸 · 40% 核心 · 40% 尾段'
+  },
+  kasuya46: {
+    id: 'kasuya46',
+    name: '粕谷哲 4:6 法',
+    desc: '前40%定酸甜 · 后60%定浓度'
+  },
+  ice_flash: {
+    id: 'ice_flash',
+    name: '急冷三段式 (冰手冲)',
+    desc: '25% 闷蒸 · 40% 核心 · 35% 尾段 · 摇匀'
+  },
+  ice_kasuya: {
+    id: 'ice_kasuya',
+    name: '粕谷哲 4:6 冰手冲法',
+    desc: '大粉量粗研磨 · 5段注水 · 冰液急冷'
+  },
+  aeropress: {
+    id: 'aeropress',
+    name: '爱乐压浸润加压法',
+    desc: '搅拌 10s · 浸泡 · 匀速下压'
+  },
+  immersion: {
+    id: 'immersion',
+    name: '法压壶浸润萃取法',
+    desc: '注水 · 破渣 · 下压'
+  },
+  coldbrew: {
+    id: 'coldbrew',
+    name: '冷萃慢速浸润法',
+    desc: '冷水/冰块浸润 · 缓慢静置萃取'
+  },
+  espresso: {
+    id: 'espresso',
+    name: '意式浓缩恒压萃取',
+    desc: '极细研磨 · 9 bar 黄金加压'
+  }
+};
+
 export const BrewPresets = {
   v60: {
     id: 'v60',
@@ -11,6 +54,7 @@ export const BrewPresets = {
     temp: '91-93°C',
     grind: '中细研磨 (650-800μm)',
     scheme: 'classic3',
+    schemes: ['classic3', 'kasuya46'],
     notes: '明亮酸质，层次分明'
   },
   iced_v60: {
@@ -21,6 +65,7 @@ export const BrewPresets = {
     temp: '93-95°C',
     grind: '中细偏细研磨 (600-750μm)',
     scheme: 'ice_flash',
+    schemes: ['ice_flash', 'ice_kasuya'],
     notes: '下壶置冰急速冷却，锁住奔放花果香与明亮酸质'
   },
   kalita: {
@@ -31,6 +76,7 @@ export const BrewPresets = {
     temp: '90-92°C',
     grind: '中等研磨 (750-850μm)',
     scheme: 'classic3',
+    schemes: ['classic3', 'kasuya46'],
     notes: '甜感饱满，萃取均匀'
   },
   aeropress: {
@@ -41,6 +87,7 @@ export const BrewPresets = {
     temp: '85-88°C',
     grind: '中细偏细 (500-650μm)',
     scheme: 'aeropress',
+    schemes: ['aeropress'],
     notes: '浓郁醇厚，风味纯净'
   },
   frenchpress: {
@@ -51,6 +98,7 @@ export const BrewPresets = {
     temp: '92-95°C',
     grind: '粗研磨 (900-1100μm)',
     scheme: 'immersion',
+    schemes: ['immersion'],
     notes: '油脂丰富，质感厚重'
   },
   coldbrew: {
@@ -61,6 +109,7 @@ export const BrewPresets = {
     temp: '冷水 / 冰块',
     grind: '粗研磨 (1000-1200μm)',
     scheme: 'coldbrew',
+    schemes: ['coldbrew'],
     notes: '柔和低酸，焦糖甜感'
   },
   kasuya: {
@@ -71,6 +120,7 @@ export const BrewPresets = {
     temp: '92°C',
     grind: '中粗研磨 (850-1000μm)',
     scheme: 'kasuya46',
+    schemes: ['kasuya46', 'classic3'],
     notes: '前段定酸甜，后段定浓度'
   },
   espresso: {
@@ -81,6 +131,7 @@ export const BrewPresets = {
     temp: '93°C',
     grind: '极细研磨 (200-300μm)',
     scheme: 'espresso',
+    schemes: ['espresso'],
     notes: '极高浓度，丰富 Crema'
   }
 };
@@ -171,6 +222,9 @@ export class BrewCalculator {
       this.updateSchemeDisplay();
     }
 
+    // Filter schemes initially based on default preset
+    this.updateAvailableSchemes(this.currentPreset);
+
     // Initial calculation
     this.recalculate('water');
   }
@@ -258,6 +312,32 @@ export class BrewCalculator {
     }
   }
 
+  updateAvailableSchemes(presetId) {
+    if (!this.schemeSelect) return;
+    const preset = BrewPresets[presetId];
+    if (!preset) return;
+
+    const allowedSchemeIds = preset.schemes || [preset.scheme];
+
+    this.schemeSelect.innerHTML = allowedSchemeIds.map(sId => {
+      const s = BrewSchemes[sId];
+      if (!s) return '';
+      return `<option value="${s.id}" data-name="${s.name}" data-desc="${s.desc}">${s.name} (${s.desc})</option>`;
+    }).join('');
+
+    if (!allowedSchemeIds.includes(this.currentScheme)) {
+      this.currentScheme = preset.scheme;
+    }
+    this.schemeSelect.value = this.currentScheme;
+
+    const schemeBar = document.getElementById('schemeBar');
+    if (schemeBar) {
+      schemeBar.classList.toggle('single-scheme', allowedSchemeIds.length <= 1);
+    }
+
+    this.updateSchemeDisplay();
+  }
+
   updateSchemeDisplay() {
     const schemeMethodName = document.getElementById('schemeMethodName');
     const schemeMethodDesc = document.getElementById('schemeMethodDesc');
@@ -312,11 +392,8 @@ export class BrewCalculator {
       chip.classList.toggle('active', chip.dataset.preset === presetId);
     });
 
-    // Update scheme selector if present
-    if (this.schemeSelect && this.schemeSelect.querySelector(`option[value="${preset.scheme}"]`)) {
-      this.schemeSelect.value = preset.scheme;
-      this.updateSchemeDisplay();
-    }
+    // Update available schemes strictly for this equipment!
+    this.updateAvailableSchemes(presetId);
 
     // Set values
     this.doseInput.value = this.format(preset.dose, 1);
@@ -428,6 +505,18 @@ export class BrewCalculator {
         { time: 0, timeLabel: '0:00', name: '注水', target: totalWater, note: '注入全部热水 ' + totalWater + 'g' },
         { time: 60, timeLabel: '1:00', name: '破渣搅拌', target: totalWater, note: '轻轻搅拌表层咖啡浮渣' },
         { time: 240, timeLabel: '4:00', name: '下压滤网', target: totalWater, note: '慢速下压至底部' }
+      ];
+    } else if (this.currentScheme === 'coldbrew') {
+      return [
+        { time: 0, timeLabel: '0:00', name: '注入冷水 / 放置冰块', target: totalWater, note: '注入全部冷水或铺放冰块' },
+        { time: 60, timeLabel: '12-24h', name: '低温缓慢萃取', target: totalWater, note: '密封冷藏静置 12-24 小时' },
+        { time: 120, timeLabel: '完成', name: '过滤享用', target: totalWater, note: '滤出清亮咖啡液，直接饮用' }
+      ];
+    } else if (this.currentScheme === 'espresso') {
+      return [
+        { time: 0, timeLabel: '0:00', name: '低压预浸 (Pre-infusion)', target: Math.round(totalWater * 0.25), note: '3-5 秒低压润湿粉饼' },
+        { time: 5, timeLabel: '0:05', name: '9 bar 黄金加压萃取', target: totalWater, note: '匀速流出榛果色浓稠 Crema' },
+        { time: 28, timeLabel: '0:28', name: '萃取结束', target: totalWater, note: '约 25-30 秒完成萃取' }
       ];
     } else {
       // Classic 3-Stage: 20% Bloom, 60% Body, 100% Finish

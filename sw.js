@@ -56,8 +56,16 @@ self.addEventListener('install', (event) => {
   );
 });
 
+// Listen for immediate SKIP_WAITING signal from client
+self.addEventListener('message', (event) => {
+  if (event.data && (event.data === 'SKIP_WAITING' || event.data.action === 'SKIP_WAITING')) {
+    console.log('[Service Worker] Received SKIP_WAITING signal');
+    self.skipWaiting();
+  }
+});
+
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating Mindful Drip v1.0.2...');
+  console.log(`[Service Worker] Activating ${CACHE_NAME}...`);
   event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(

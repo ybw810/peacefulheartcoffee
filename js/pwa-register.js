@@ -1,8 +1,19 @@
 /**
- * Mindful Drip - PWA Registration & Version Control Engine (v1.0.2)
+ * Mindful Drip - PWA Registration & Version Control Engine
  */
 
-export const APP_BUILD_VERSION = '1.0.2';
+export function getRunningAppVersion() {
+  const badge = document.getElementById('appVersionText');
+  if (badge && badge.textContent) {
+    const v = badge.textContent.replace(/^v/i, '').trim();
+    if (v) return v;
+  }
+  const meta = document.querySelector('meta[name="app-version"]');
+  if (meta && meta.content) {
+    return meta.content.trim();
+  }
+  return '1.0.4';
+}
 
 export function registerPWA() {
   let swRegistration = null;
@@ -14,7 +25,7 @@ export function registerPWA() {
       navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
         .then(reg => {
           swRegistration = reg;
-          console.log('[Mindful Drip PWA] Service Worker registered (v' + APP_BUILD_VERSION + ')');
+          console.log('[Mindful Drip PWA] Service Worker registered (running v' + getRunningAppVersion() + ')');
 
           // Check if there is already a waiting worker waiting to activate
           if (reg.waiting) {
@@ -71,19 +82,26 @@ export function registerPWA() {
       const res = await fetch('./version.json?_t=' + Date.now(), { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
+        const currentVersion = getRunningAppVersion();
         if (data && data.version) {
           latestFoundVersion = data.version;
-          if (data.version !== APP_BUILD_VERSION) {
+          if (data.version !== currentVersion) {
             const dismissedVer = sessionStorage.getItem('dismissed_version') || localStorage.getItem('dismissed_version');
             if (!isManual && dismissedVer === data.version) {
               return;
             }
             showUpdateToast(`发现新版本 v${data.version} · 点击刷新`);
             return;
+          } else {
+            // Version matches, ensure update toast is dismissed if shown
+            const toast = document.getElementById('updateToast');
+            if (toast && !isManual && toast.classList.contains('show')) {
+              toast.classList.remove('show');
+            }
           }
         }
         if (isManual) {
-          showToastNotice(`当前已是最新版 (v${APP_BUILD_VERSION}) ✨`);
+          showToastNotice(`当前已是最新版 (v${currentVersion}) ✨`);
         }
       }
     } catch (e) {
@@ -160,10 +178,17 @@ export function registerPWA() {
   // Force clean all caches and hard reload
   async function forceCleanAndReload() {
     try {
+      if (swRegistration && swRegistration.waiting) {
+        swRegistration.waiting.postMessage({ action: 'SKIP_WAITING' });
+      }
       if ('caches' in window) {
         const keys = await caches.keys();
         await Promise.all(keys.map(k => caches.delete(k)));
       }
+      try {
+        sessionStorage.removeItem('dismissed_version');
+        localStorage.removeItem('dismissed_version');
+      } catch (err) {}
       if ('serviceWorker' in navigator) {
         const registrations = await navigator.serviceWorker.getRegistrations();
         for (let r of registrations) {
@@ -173,7 +198,7 @@ export function registerPWA() {
     } catch (e) {
       console.warn('Cache purge error:', e);
     }
-    window.location.href = window.location.origin + window.location.pathname + '?_v=' + Date.now();
+    window.location.replace(window.location.origin + window.location.pathname + '?_reload=' + Date.now());
   }
 
   // 5. PWA Install Prompt Banner

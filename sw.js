@@ -1,24 +1,24 @@
 /**
- * Mindful Drip - PWA Service Worker (v1.0.2)
+ * Mindful Drip - PWA Service Worker (v1.0.3)
  * Intelligent Network-First for Navigation, Stale-While-Revalidate for Assets
  */
 
-const CACHE_NAME = 'mindful-drip-v1.0.2';
+const CACHE_NAME = 'mindful-drip-v1.0.3';
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './css/design-tokens.css?v=1.0.2',
-  './css/app.css?v=1.0.2',
-  './js/app.js?v=1.0.2',
-  './js/brew-calc.js?v=1.0.2',
-  './js/timer.js?v=1.0.2',
-  './js/golden-cup.js?v=1.0.2',
-  './js/compass-bh.js?v=1.0.2',
-  './js/qr-modal.js?v=1.0.2',
-  './js/pwa-register.js?v=1.0.2',
-  './og-image.png?v=1.0.2',
+  './css/design-tokens.css?v=1.0.3',
+  './css/app.css?v=1.0.3',
+  './js/app.js?v=1.0.3',
+  './js/brew-calc.js?v=1.0.3',
+  './js/timer.js?v=1.0.3',
+  './js/golden-cup.js?v=1.0.3',
+  './js/compass-bh.js?v=1.0.3',
+  './js/qr-modal.js?v=1.0.3',
+  './js/pwa-register.js?v=1.0.3',
+  './og-image.png?v=1.0.3',
   './favicon.ico',
   './favicon.svg',
   './apple-touch-icon.png',
@@ -32,14 +32,16 @@ const ASSETS_TO_CACHE = [
   './assets/icons/apple-touch-icon.png',
   './assets/icons/og-image.png',
   './assets/qr/official-account.png',
-  './assets/qr/mini-program.png'
+  './assets/qr/official-account.png?v=1.0.3',
+  './assets/qr/mini-program.png',
+  './assets/qr/mini-program.png?v=1.0.3'
 ];
 
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing Mindful Drip v1.0.2...');
+  console.log('[Service Worker] Installing Mindful Drip v1.0.3...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      console.log('[Service Worker] Pre-caching offline assets for v1.0.2');
+      console.log('[Service Worker] Pre-caching offline assets for v1.0.3');
       // Resilient pre-caching: cache assets individually so one failure does not break the entire SW
       await Promise.allSettled(
         ASSETS_TO_CACHE.map(url => cache.add(url).catch(err => console.warn('[SW Pre-cache Error]', url, err)))

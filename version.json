@@ -1,8 +1,8 @@
 {
-  "version": "1.0.2",
-  "build": "20261017.104",
+  "version": "1.0.3",
+  "build": "20261017.105",
   "channel": "production",
   "name": "Peaceful Heart Coffee · Mindful Drip Precision Lab",
-  "releaseNotes": "升级全新 1:1 黄金分割视觉中枢社交分享海报 (og:image 1200×630) 与原版黑曜金 PWA 应用图标。"
+  "releaseNotes": "更新微信官方公众号与微信点单小程序专属太阳码二维码，支持顶部快捷导航直达与高清放大识别。"
 }
 

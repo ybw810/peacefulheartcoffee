@@ -1,35 +1,41 @@
 /**
- * Mindful Drip - PWA Service Worker (v1.0.3)
+ * Mindful Drip - PWA Service Worker (v1.0.4)
  * Intelligent Network-First for Navigation, Stale-While-Revalidate for Assets
  */
 
-const CACHE_NAME = 'mindful-drip-v1.0.3';
+const CACHE_NAME = 'mindful-drip-v1.0.4';
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './css/design-tokens.css?v=1.0.3',
-  './css/app.css?v=1.0.3',
-  './js/app.js?v=1.0.3',
-  './js/brew-calc.js?v=1.0.3',
-  './js/timer.js?v=1.0.3',
-  './js/golden-cup.js?v=1.0.3',
-  './js/compass-bh.js?v=1.0.3',
-  './js/qr-modal.js?v=1.0.3',
-  './js/pwa-register.js?v=1.0.3',
-  './og-image.png?v=1.0.3',
+  './css/design-tokens.css?v=1.0.4',
+  './css/app.css?v=1.0.4',
+  './js/app.js?v=1.0.4',
+  './js/brew-calc.js?v=1.0.4',
+  './js/timer.js?v=1.0.4',
+  './js/golden-cup.js?v=1.0.4',
+  './js/compass-bh.js?v=1.0.4',
+  './js/qr-modal.js?v=1.0.4',
+  './js/pwa-register.js?v=1.0.4',
+  './og-image.png?v=1.0.4',
   './favicon.ico',
   './favicon.svg',
+  './apple-touch-icon.png?v=1.0.4',
   './apple-touch-icon.png',
   './touch-icon.png',
   './favicon-32x32.png',
   './favicon-16x16.png',
   './assets/icons/favicon.svg',
+  './assets/icons/icon-192.png?v=1.0.4',
+  './assets/icons/icon-512.png?v=1.0.4',
+  './assets/icons/icon-maskable.png?v=1.0.4',
+  './assets/icons/apple-touch-icon.png?v=1.0.4',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/icon-maskable.png',
   './assets/icons/apple-touch-icon.png',
+  './assets/icons/og-image.png?v=1.0.4',
   './assets/icons/og-image.png',
   './assets/qr/official-account.png',
   './assets/qr/official-account.png?v=1.0.3',
@@ -38,10 +44,10 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing Mindful Drip v1.0.3...');
+  console.log('[Service Worker] Installing Mindful Drip v1.0.4...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      console.log('[Service Worker] Pre-caching offline assets for v1.0.3');
+      console.log('[Service Worker] Pre-caching offline assets for v1.0.4');
       // Resilient pre-caching: cache assets individually so one failure does not break the entire SW
       await Promise.allSettled(
         ASSETS_TO_CACHE.map(url => cache.add(url).catch(err => console.warn('[SW Pre-cache Error]', url, err)))

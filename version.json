@@ -1,8 +1,8 @@
 {
-  "version": "1.0.3",
-  "build": "20261017.105",
+  "version": "1.0.4",
+  "build": "20261017.106",
   "channel": "production",
   "name": "Peaceful Heart Coffee · Mindful Drip Precision Lab",
-  "releaseNotes": "更新微信官方公众号与微信点单小程序专属太阳码二维码，支持顶部快捷导航直达与高清放大识别。"
+  "releaseNotes": "全面重绘并同步所有应用图标体系与社交分享大图 (og-image)，基于 master-icon.svg 黑曜琥珀金多层高精雕琢材质。"
 }
 

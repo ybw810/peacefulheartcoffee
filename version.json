@@ -1,8 +1,7 @@
 {
-  "version": "1.0.4",
-  "build": "20261017.106",
+  "version": "1.0.5",
+  "build": "20261018.107",
   "channel": "production",
   "name": "Peaceful Heart Coffee · Mindful Drip Precision Lab",
-  "releaseNotes": "全面重绘并同步所有应用图标体系与社交分享大图 (og-image)，基于 master-icon.svg 黑曜琥珀金多层高精雕琢材质。"
+  "releaseNotes": "全面适配 90% 紧凑极客比例与抗折行排版优化：缩小元素尺度，紧凑粉水三向联动输入与计时器，消除小屏折行与视觉冗余。"
 }
-
